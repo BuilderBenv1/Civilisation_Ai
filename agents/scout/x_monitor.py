@@ -16,16 +16,6 @@ SEARCH_QUERIES = [
     "automate this workflow",
     "need an AI agent",
     "agent bounty",
-    "AI automation project",
-    "blockchain development task",
-    "data analysis python",
-    "web scraping job",
-    "API integration needed",
-    "automation consultant",
-    "python developer needed",
-    "data enrichment task",
-    "workflow automation",
-    "scraping specialist",
 ]
 
 TWITTER_SEARCH_URL = "https://twitter-api45.p.rapidapi.com/search.php"

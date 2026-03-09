@@ -73,43 +73,6 @@ def sanitise_task(description: str) -> tuple[bool, str]:
     return True, ""
 
 
-def validate_task_parameters(skill_name: str, params: dict, description: str) -> tuple[bool, str]:
-    """Validate that we have all required parameters for successful task execution."""
-    if skill_name == "scrape":
-        url = params.get("url", "")
-        if not url or not url.startswith(("http://", "https://")):
-            return False, "Missing or invalid URL for scraping task"
-        if len(url) > 2000:
-            return False, "URL too long, likely malformed"
-    
-    elif skill_name == "extract":
-        raw_text = params.get("raw_text", "")
-        schema = params.get("schema_description", "")
-        if not raw_text or len(raw_text.strip()) < 10:
-            return False, "Insufficient text content for extraction"
-        if not schema or len(schema.strip()) < 5:
-            return False, "Missing or insufficient schema description"
-    
-    elif skill_name == "enrich":
-        items = params.get("items", [])
-        enrich_with = params.get("enrich_with", "")
-        if not items or not isinstance(items, list) or len(items) == 0:
-            return False, "Missing or empty items list for enrichment"
-        if not enrich_with or len(enrich_with.strip()) < 5:
-            return False, "Missing enrichment specification"
-    
-    elif skill_name == "automate":
-        workflow = params.get("workflow_description", "")
-        if not workflow or len(workflow.strip()) < 20:
-            return False, "Insufficient workflow description for automation"
-    
-    # Check if description contains enough context
-    if len(description.strip()) < 30:
-        return False, "Task description too brief for reliable execution"
-    
-    return True, ""
-
-
 def pick_skill(task_description: str) -> dict:
     """Use Claude to determine which skill to use and extract parameters."""
     result = ask_json(
@@ -118,15 +81,14 @@ def pick_skill(task_description: str) -> dict:
 Task: {task_description}
 
 Available skills:
-- scrape: Extract data from websites (needs: url, extract_what)
-- extract: Parse structured data from text (needs: raw_text, schema_description)
-- enrich: Add data to a list of items (needs: items, enrich_with)
-- automate: Build a workflow/pipeline (needs: workflow_description)
+- scrape: scrape_url(url, extract_what) — web scraping with BeautifulSoup
+- extract: extract_structured_data(raw_text, schema_description) — parse unstructured text
+- enrich: enrich_list(items, enrich_with) — add data to a list of items
+- automate: build_automation(task_description) — general automation pipeline
 
-Return JSON with:
+Return JSON:
 {{
-    "skill": "skill_name",
-    "confidence": 0.0-1.0,
+    "skill": "scrape|extract|enrich|automate",
     "parameters": {{...}},
     "reasoning": "why this skill fits"
 }}""",
@@ -135,202 +97,317 @@ Return JSON with:
     return result
 
 
-def calculate_bid_price(opportunity: dict) -> float:
-    """Calculate competitive bid price based on opportunity budget and complexity."""
-    estimated_value = float(opportunity.get("estimated_value", 0))
-    complexity = opportunity.get("complexity", "medium")
-    platform = opportunity.get("platform", "unknown")
-    
-    # Base pricing by complexity
-    complexity_multipliers = {
-        "low": 0.6,     # Bid 60% of estimated value for simple tasks
-        "medium": 0.75, # Bid 75% for medium complexity
-        "high": 0.9,    # Bid 90% for complex tasks (less competition)
-    }
-    
-    base_price = estimated_value * complexity_multipliers.get(complexity, 0.75)
-    
-    # Platform adjustments
-    if platform == "clawgig":
-        base_price *= 0.95  # Slightly lower for established platform
-    elif platform == "twitter":
-        base_price *= 0.8   # More aggressive pricing for speculative leads
-    
-    # Minimum viable price
-    return max(base_price, 10.0)
-
-
 def execute_task(opportunity: dict) -> dict:
-    """Execute a task opportunity and return results."""
+    """Execute a task using the appropriate skill. Enhanced with retry logic."""
     task_id = opportunity.get("id")
     description = opportunity.get("description", "")
     
     log.info("Executing task %s: %s", task_id, description[:100])
     
-    try:
-        # Security check
-        safe, reason = sanitise_task(description)
-        if not safe:
-            return {"success": False, "error": f"Security check failed: {reason}"}
-        
-        # Pick skill and extract parameters
-        skill_choice = pick_skill(description)
-        skill_name = skill_choice.get("skill")
-        confidence = skill_choice.get("confidence", 0)
-        parameters = skill_choice.get("parameters", {})
-        
-        if confidence < 0.3:
-            return {"success": False, "error": f"Low confidence in skill selection: {confidence}"}
-        
-        if skill_name not in SKILLS:
-            return {"success": False, "error": f"Unknown skill: {skill_name}"}
-        
-        # Validate parameters before execution
-        valid, validation_error = validate_task_parameters(skill_name, parameters, description)
-        if not valid:
-            return {"success": False, "error": f"Parameter validation failed: {validation_error}"}
-        
-        # Execute the skill
-        skill_func = SKILLS[skill_name]
-        
-        if skill_name == "scrape":
-            result = skill_func(
-                url=parameters.get("url"),
-                extract_what=parameters.get("extract_what", "all content")
-            )
-        elif skill_name == "extract":
-            result = skill_func(
-                raw_text=parameters.get("raw_text"),
-                schema_description=parameters.get("schema_description")
-            )
-        elif skill_name == "enrich":
-            result = skill_func(
-                items=parameters.get("items"),
-                enrich_with=parameters.get("enrich_with")
-            )
-        elif skill_name == "automate":
-            result = skill_func(
-                workflow_description=parameters.get("workflow_description")
-            )
-        else:
-            return {"success": False, "error": f"Skill {skill_name} not implemented"}
-        
-        if result.get("success"):
-            log.info("Task %s completed successfully", task_id)
+    # Safety check
+    safe, reason = sanitise_task(description)
+    if not safe:
+        log.warning("Task %s blocked: %s", task_id, reason)
+        return {
+            "success": False,
+            "error": f"Security check failed: {reason}",
+            "result": None,
+        }
+    
+    max_retries = 3
+    retry_count = 0
+    
+    while retry_count < max_retries:
+        try:
+            # Pick skill and parameters
+            skill_choice = pick_skill(description)
+            skill_name = skill_choice.get("skill")
+            parameters = skill_choice.get("parameters", {})
+            
+            log.info("Task %s: using skill '%s' with params %s", task_id, skill_name, parameters)
+            
+            if skill_name not in SKILLS:
+                return {
+                    "success": False,
+                    "error": f"Unknown skill: {skill_name}",
+                    "result": None,
+                }
+            
+            skill_func = SKILLS[skill_name]
+            
+            # Execute skill with parameters
+            if skill_name == "scrape":
+                result = skill_func(
+                    url=parameters.get("url", ""),
+                    extract_what=parameters.get("extract_what", "all content"),
+                )
+            elif skill_name == "extract":
+                result = skill_func(
+                    raw_text=parameters.get("raw_text", description),
+                    schema_description=parameters.get("schema_description", "structured data"),
+                )
+            elif skill_name == "enrich":
+                result = skill_func(
+                    items=parameters.get("items", []),
+                    enrich_with=parameters.get("enrich_with", "additional data"),
+                )
+            elif skill_name == "automate":
+                result = skill_func(task_description=description)
+            else:
+                result = {"success": False, "error": "Skill execution not implemented"}
+            
+            # Check if result indicates success
+            if isinstance(result, dict) and result.get("success") is False:
+                error_msg = result.get("error", "Unknown error")
+                
+                # Check if this is a retryable error
+                retryable_errors = [
+                    "timeout", "connection", "network", "temporary", 
+                    "rate limit", "503", "502", "504", "429"
+                ]
+                
+                is_retryable = any(err in error_msg.lower() for err in retryable_errors)
+                
+                if is_retryable and retry_count < max_retries - 1:
+                    retry_count += 1
+                    wait_time = 2 ** retry_count  # Exponential backoff
+                    log.warning("Task %s failed with retryable error '%s', retrying in %ds (attempt %d/%d)", 
+                               task_id, error_msg, wait_time, retry_count + 1, max_retries)
+                    time.sleep(wait_time)
+                    continue
+                else:
+                    log.error("Task %s failed after %d attempts: %s", task_id, retry_count + 1, error_msg)
+                    return {
+                        "success": False,
+                        "error": f"Failed after {retry_count + 1} attempts: {error_msg}",
+                        "result": result,
+                        "retry_count": retry_count + 1,
+                    }
+            
+            # Success case
+            log.info("Task %s completed successfully on attempt %d", task_id, retry_count + 1)
             return {
                 "success": True,
-                "skill_used": skill_name,
+                "error": None,
                 "result": result,
-                "confidence": confidence
+                "skill_used": skill_name,
+                "retry_count": retry_count,
             }
-        else:
-            log.warning("Task %s failed: %s", task_id, result.get("error"))
-            return {"success": False, "error": result.get("error", "Unknown skill error")}
-    
-    except Exception as e:
-        log.error("Task execution error for %s: %s\n%s", task_id, e, traceback.format_exc())
-        return {"success": False, "error": f"Execution exception: {str(e)}"}
-
-
-def handle_clawgig_events():
-    """Process new ClawGig events and update opportunity statuses."""
-    events = get_unprocessed_clawgig_events()
-    for event in events:
-        try:
-            gig_id = event.get("gig_id")
-            event_type = event.get("event_type")
             
-            if event_type == "gig_completed":
-                # Find our opportunity record
-                opp = find_opportunity_by_gig_id(gig_id)
-                if opp:
-                    # Record payment
-                    amount = float(event.get("amount_usdc", 0))
-                    if amount > 0:
-                        record_income(amount, f"ClawGig completion: {gig_id}")
-                        notify_payment(amount, "USDC", "ClawGig")
-                        log.info("Recorded ClawGig payment: $%.2f USDC", amount)
-            
-            mark_clawgig_event_processed(event["id"])
         except Exception as e:
-            log.error("Error processing ClawGig event %s: %s", event.get("id"), e)
+            error_msg = str(e)
+            log.error("Task %s execution error (attempt %d): %s\n%s", 
+                     task_id, retry_count + 1, error_msg, traceback.format_exc())
+            
+            # Check if this is a retryable exception
+            retryable_exceptions = [
+                "timeout", "connection", "network", "temporary",
+                "requests.exceptions", "urllib3.exceptions"
+            ]
+            
+            is_retryable = any(err in error_msg.lower() for err in retryable_exceptions)
+            
+            if is_retryable and retry_count < max_retries - 1:
+                retry_count += 1
+                wait_time = 2 ** retry_count
+                log.warning("Task %s exception is retryable, waiting %ds before retry %d/%d", 
+                           task_id, wait_time, retry_count + 1, max_retries)
+                time.sleep(wait_time)
+                continue
+            else:
+                return {
+                    "success": False,
+                    "error": f"Exception after {retry_count + 1} attempts: {error_msg}",
+                    "result": None,
+                    "retry_count": retry_count + 1,
+                }
+    
+    # Should not reach here, but just in case
+    return {
+        "success": False,
+        "error": f"Max retries ({max_retries}) exceeded",
+        "result": None,
+        "retry_count": max_retries,
+    }
+
+
+def submit_proposal(opportunity: dict, result: dict) -> bool:
+    """Submit our work/proposal for this opportunity."""
+    platform = opportunity.get("platform", "unknown")
+    
+    if platform == "clawgig":
+        return _submit_clawgig_proposal(opportunity, result)
+    elif platform == "twitter":
+        return _submit_twitter_proposal(opportunity, result)
+    elif platform == "upwork":
+        return _submit_upwork_proposal(opportunity, result)
+    else:
+        log.warning("No submission handler for platform: %s", platform)
+        return False
+
+
+def _submit_clawgig_proposal(opportunity: dict, result: dict) -> bool:
+    """Submit work to ClawGig platform."""
+    try:
+        from shared.clawgig import submit_work
+        gig_id = opportunity.get("gig_id")
+        if not gig_id:
+            log.error("ClawGig opportunity missing gig_id")
+            return False
+        
+        success = submit_work(gig_id, result)
+        if success:
+            notify_job_completed(
+                platform="clawgig",
+                task_id=gig_id,
+                value=opportunity.get("estimated_value", 0),
+            )
+        return success
+    except Exception as e:
+        log.error("ClawGig submission failed: %s", e)
+        return False
+
+
+def _submit_twitter_proposal(opportunity: dict, result: dict) -> bool:
+    """Reply to Twitter thread with our proposal/solution."""
+    try:
+        # For now, just log — Twitter API integration needed
+        log.info("Would submit Twitter proposal for: %s", opportunity.get("url", ""))
+        notify_proposal_sent(
+            platform="twitter",
+            task_id=opportunity.get("tweet_id", ""),
+            proposal_text="Solution provided",
+        )
+        return True
+    except Exception as e:
+        log.error("Twitter submission failed: %s", e)
+        return False
+
+
+def _submit_upwork_proposal(opportunity: dict, result: dict) -> bool:
+    """Submit proposal to Upwork job."""
+    try:
+        # Upwork API integration needed
+        log.info("Would submit Upwork proposal for: %s", opportunity.get("url", ""))
+        return True
+    except Exception as e:
+        log.error("Upwork submission failed: %s", e)
+        return False
+
+
+def process_clawgig_events():
+    """Process new ClawGig payment events."""
+    try:
+        events = get_unprocessed_clawgig_events()
+        for event in events:
+            if event.get("event_type") == "payment":
+                amount = float(event.get("amount", 0))
+                gig_id = event.get("gig_id")
+                
+                # Find the opportunity this payment relates to
+                opportunity = find_opportunity_by_gig_id(gig_id)
+                
+                if amount > 0:
+                    record_income(amount, f"ClawGig payment for gig {gig_id}")
+                    log.info("Recorded ClawGig payment: $%.2f for gig %s", amount, gig_id)
+                    notify_payment(amount, "ClawGig", gig_id)
+                
+                mark_clawgig_event_processed(event["id"])
+    except Exception as e:
+        log.error("ClawGig event processing failed: %s", e)
 
 
 def run_cycle():
-    """Run one Worker cycle — pick tasks, execute them, log results."""
+    """Single Worker cycle — find tasks, execute, submit."""
     run_id = log_run_start("worker")
     
     try:
-        # Handle ClawGig events first
-        handle_clawgig_events()
+        # Process any pending payments first
+        process_clawgig_events()
         
         # Get new opportunities
         opportunities = get_new_opportunities(limit=20)
         if not opportunities:
             log.info("No new opportunities found")
-            log_run_end(run_id, status="completed", summary={"tasks_attempted": 0})
+            log_run_end(run_id, status="completed", summary={"opportunities": 0})
             return
         
         # Rank by ROI
         ranked = rank_opportunities(opportunities)
         
-        # Attempt top tasks
-        attempted = 0
         completed = 0
+        failed = 0
         
-        for opp in ranked[:MAX_TASKS_PER_CYCLE]:
-            attempted += 1
+        # Attempt top opportunities
+        for opportunity in ranked[:MAX_TASKS_PER_CYCLE]:
+            opp_id = opportunity.get("id")
             
-            # Mark as in progress
-            update_opportunity(opp["id"], status="in_progress")
-            
-            # Execute task
-            result = execute_task(opp)
-            
-            if result["success"]:
-                completed += 1
+            try:
+                # Mark as in progress
+                update_opportunity(opp_id, status="in_progress")
+                
+                # Execute the task
+                result = execute_task(opportunity)
+                
+                if result.get("success"):
+                    # Submit our work
+                    submitted = submit_proposal(opportunity, result)
+                    
+                    if submitted:
+                        update_opportunity(
+                            opp_id,
+                            status="completed",
+                            result=result,
+                            worker_notes=f"Completed using {result.get('skill_used', 'unknown')} skill"
+                        )
+                        completed += 1
+                        log.info("Task %s completed and submitted", opp_id)
+                    else:
+                        update_opportunity(
+                            opp_id,
+                            status="failed",
+                            result=result,
+                            worker_notes="Task completed but submission failed"
+                        )
+                        failed += 1
+                else:
+                    # Task execution failed
+                    update_opportunity(
+                        opp_id,
+                        status="failed",
+                        result=result,
+                        worker_notes=f"Execution failed: {result.get('error', 'Unknown error')}"
+                    )
+                    failed += 1
+                    
+                    # Notify of persistent failures
+                    retry_count = result.get('retry_count', 0)
+                    if retry_count >= 3:
+                        notify_error(f"Task {opp_id} failed after {retry_count} retries: {result.get('error')}")
+                
+            except Exception as e:
+                log.error("Task %s processing error: %s\n%s", opp_id, e, traceback.format_exc())
                 update_opportunity(
-                    opp["id"],
-                    status="completed",
-                    result=result["result"],
-                    metadata={"skill_used": result["skill_used"]}
-                )
-                
-                # Calculate and record payment
-                bid_price = calculate_bid_price(opp)
-                record_income(bid_price, f"Task completion: {opp['id']}")
-                
-                notify_job_completed(
-                    task_id=opp["id"],
-                    platform=opp.get("platform", "unknown"),
-                    amount=bid_price,
-                    skill=result["skill_used"]
-                )
-                
-                log.info("Task %s completed, recorded $%.2f income", opp["id"], bid_price)
-            else:
-                update_opportunity(
-                    opp["id"],
+                    opp_id,
                     status="failed",
-                    error=result["error"]
+                    worker_notes=f"Processing error: {str(e)}"
                 )
-                log.warning("Task %s failed: %s", opp["id"], result["error"])
+                failed += 1
         
         summary = {
-            "opportunities_found": len(opportunities),
-            "tasks_attempted": attempted,
-            "tasks_completed": completed,
-            "success_rate": completed / attempted if attempted > 0 else 0
+            "opportunities": len(opportunities),
+            "attempted": min(len(ranked), MAX_TASKS_PER_CYCLE),
+            "completed": completed,
+            "failed": failed,
         }
         
         log.info(
-            "Worker cycle: %d opportunities, %d attempted, %d completed (%.1f%% success)",
-            len(opportunities), attempted, completed,
-            100 * completed / attempted if attempted > 0 else 0
+            "Worker cycle: %d opportunities, %d attempted, %d completed, %d failed",
+            summary["opportunities"], summary["attempted"], summary["completed"], summary["failed"]
         )
         
         log_run_end(run_id, status="completed", summary=summary)
-    
+        
     except Exception as e:
         log.error("Worker cycle failed: %s\n%s", e, traceback.format_exc())
         log_run_end(run_id, status="failed", error=str(e))

@@ -219,11 +219,15 @@ RULES:
 - You CAN ONLY modify these files: {', '.join(EVOLVABLE_FILES)}
 - You MUST provide the COMPLETE new file content, not a snippet or fragment
 - The code must be valid Python that parses without errors
-- Do NOT remove existing imports, logging, or error handling
-- Do NOT change function signatures that other modules depend on
+- CRITICAL: Do NOT remove existing imports, logging, or error handling
+- CRITICAL: Do NOT change function signatures — other modules depend on them
+- CRITICAL: Do NOT rewrite more than ~20% of a file — make TARGETED edits
+- CRITICAL: Do NOT change how treasury logging works — only REAL confirmed payments log to treasury
+- CRITICAL: Do NOT log estimated_value as income — only webhook-confirmed payments
+- Keep ALL existing function names, class names, and module-level variables unchanged
 - Focus on changes that directly increase income or reduce waste
-- Prefer small, targeted changes — modify one function, not the whole file
-- Maximum 2 proposals per cycle (quality over quantity)
+- Prefer adding a few lines or modifying one function over rewriting sections
+- Maximum 1 proposal per cycle (quality over quantity)
 - Do NOT repeat proposals that have already been made (see reflection above)
 
 Return JSON:
@@ -298,18 +302,32 @@ def _apply_proposal(proposal: dict, fitness: dict, crisis: bool = False) -> bool
         log.warning("BLOCKED: target file %s does not exist", target_file)
         return False
 
-    # Read old content for size sanity check
+    # Read old content for diff analysis
     old_code = _read_file(target_file)
-    old_lines = len(old_code.split("\n"))
-    new_lines = len(new_code.split("\n"))
+    old_lines = old_code.split("\n")
+    new_lines = new_code.split("\n")
 
     # Reject if new file is less than 50% the size of old (probably a fragment)
-    if old_lines > 20 and new_lines < old_lines * 0.5:
+    if len(old_lines) > 20 and len(new_lines) < len(old_lines) * 0.5:
         log.warning(
             "BLOCKED: new file too small (%d lines vs %d original) — likely a fragment",
-            new_lines, old_lines,
+            len(new_lines), len(old_lines),
         )
         return False
+
+    # Reject if more than 30% of lines changed — Darwin should make targeted edits
+    # not wholesale rewrites that break existing functionality
+    if len(old_lines) > 20:
+        import difflib
+        diff = list(difflib.unified_diff(old_lines, new_lines, n=0))
+        changed_lines = sum(1 for line in diff if line.startswith('+') or line.startswith('-'))
+        change_ratio = changed_lines / (len(old_lines) * 2)  # Normalise against both adds and removes
+        if change_ratio > 0.30:
+            log.warning(
+                "BLOCKED: too many changes (%.0f%% of file) — Darwin must make targeted edits, not rewrites",
+                change_ratio * 100,
+            )
+            return False
 
     try:
         # Get current git hash for rollback

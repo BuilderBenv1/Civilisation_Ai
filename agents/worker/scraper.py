@@ -20,34 +20,21 @@ def scrape_url(url: str, extract_what: str = "all text content") -> dict:
     if not url or not url.startswith(('http://', 'https://')):
         return {"success": False, "error": "Invalid URL provided"}
     
-    # Pre-validate URL accessibility
-    try:
-        import requests
-        test_response = requests.head(url, timeout=10, allow_redirects=True)
-        if test_response.status_code >= 400:
-            return {"success": False, "error": f"URL returned {test_response.status_code}"}
-    except requests.exceptions.RequestException as e:
-        return {"success": False, "error": f"URL not accessible: {str(e)}"}
-    
     script = ask(
         f"""Write a Python script that:
-1. Fetches {url} using requests with proper headers and timeout
+1. Fetches {url} using requests
 2. Parses with BeautifulSoup
 3. Extracts: {extract_what}
 4. Prints the result as JSON to stdout
-5. Handles common errors: timeouts, 404s, parsing failures
-6. Uses User-Agent header to avoid blocking
-7. Limits response size to prevent memory issues
 
 Use only: requests, bs4, json, re (standard libs + requests + bs4).
-Include comprehensive error handling for network and parsing errors.
-Print ONLY valid JSON with success/error fields.
+Include error handling. Print ONLY valid JSON.
 Do not include any markdown formatting or explanation.""",
-        system="You are a Python developer. Return ONLY the Python script, no explanation. Focus on robust error handling.",
+        system="You are a Python developer. Return ONLY the Python script, no explanation.",
         temperature=0.1,
     )
 
-    return _run_generated_script(script, timeout=90)  # Increased timeout for complex scraping
+    return _run_generated_script(script, timeout=60)
 
 
 def extract_structured_data(raw_text: str, schema_description: str) -> dict:
@@ -55,14 +42,8 @@ def extract_structured_data(raw_text: str, schema_description: str) -> dict:
     if not raw_text or not raw_text.strip():
         return {"success": False, "error": "No text provided for extraction"}
     
-    # Validate text length and content
-    if len(raw_text) > 50000:
-        raw_text = raw_text[:50000] + "... [truncated]"
-        log.warning("Text truncated to 50k chars for extraction")
-    
-    try:
-        result = ask_json(
-            f"""Extract structured data from this text.
+    result = ask_json(
+        f"""Extract structured data from this text.
 
 Text:
 {raw_text[:4000]}
@@ -70,12 +51,9 @@ Text:
 Desired schema: {schema_description}
 
 Return the extracted data as JSON matching the described schema.""",
-            temperature=0.1,
-        )
-        return {"success": True, "data": result}
-    except Exception as e:
-        log.error("Data extraction failed: %s", e)
-        return {"success": False, "error": f"Extraction failed: {str(e)}"}
+        temperature=0.1,
+    )
+    return {"success": True, "data": result}
 
 
 def enrich_list(items: list[str], enrich_with: str) -> list[dict]:
@@ -86,128 +64,145 @@ def enrich_list(items: list[str], enrich_with: str) -> list[dict]:
     if len(items) > 100:
         items = items[:100]  # Limit to prevent excessive API usage
     
-    try:
-        result = ask_json(
-            f"""Enrich each item in this list with: {enrich_with}
+    result = ask_json(
+        f"""Enrich each item in this list with: {enrich_with}
 
 Items:
 {json.dumps(items)}
 
 Return a JSON array of objects, one per item, with the original value
 and enriched fields.""",
-            temperature=0.2,
-        )
-        
-        if isinstance(result, list):
-            return {"success": True, "data": result}
-        else:
-            return {"success": False, "error": "Invalid response format from enrichment"}
-    except Exception as e:
-        log.error("List enrichment failed: %s", e)
-        return {"success": False, "error": f"Enrichment failed: {str(e)}"}
+        temperature=0.2,
+    )
+    
+    if isinstance(result, list):
+        return {"success": True, "data": result}
+    else:
+        return {"success": False, "error": "Failed to generate enriched list"}
 
 
 def build_automation(task_description: str) -> dict:
-    """Generate and execute an automation script based on task description."""
-    if not task_description or len(task_description.strip()) < 10:
-        return {"success": False, "error": "Task description too short or empty"}
+    """Generate and execute a simple automation pipeline."""
+    if not task_description or not task_description.strip():
+        return {"success": False, "error": "No task description provided"}
     
-    # Safety check for dangerous operations
-    dangerous_keywords = ['delete', 'remove', 'rm ', 'drop table', 'format', 'shutdown']
-    if any(keyword in task_description.lower() for keyword in dangerous_keywords):
-        return {"success": False, "error": "Task contains potentially dangerous operations"}
-    
-    try:
-        script = ask(
-            f"""Create a Python automation script for this task:
+    # Plan the automation
+    plan = ask_json(
+        f"""Plan an automation for this task:
+
 {task_description}
 
-Requirements:
-- Use only standard libraries and requests, bs4 if needed
-- Include comprehensive error handling
-- Print results as JSON to stdout
-- No file system modifications outside /tmp
-- No network operations to internal/private IPs
-- Include progress logging
+Return JSON:
+{{
+    "steps": ["step 1", "step 2", ...],
+    "requires_playwright": true/false,
+    "estimated_duration_seconds": number,
+    "python_script": "complete Python script to execute this automation"
+}}
 
-Return ONLY the Python script, no explanation.""",
-            system="You are a Python automation expert. Focus on safe, robust code with excellent error handling.",
-            temperature=0.2,
-        )
-        
-        return _run_generated_script(script, timeout=120)
-    except Exception as e:
-        log.error("Automation script generation failed: %s", e)
-        return {"success": False, "error": f"Script generation failed: {str(e)}"}
+The Python script should use only standard libraries + requests + bs4.
+Include error handling and print results as JSON.""",
+        temperature=0.2,
+    )
+    
+    if not isinstance(plan, dict) or "python_script" not in plan:
+        return {"success": False, "error": "Failed to generate automation plan"}
+    
+    script = plan.get("python_script", "")
+    if not script:
+        return {"success": False, "error": "No script generated in automation plan"}
+    
+    # Execute the generated script
+    result = _run_generated_script(script, timeout=120)
+    
+    if result.get("success"):
+        result["automation_plan"] = {
+            "steps": plan.get("steps", []),
+            "estimated_duration": plan.get("estimated_duration_seconds", 0)
+        }
+    
+    return result
 
 
 def _run_generated_script(script: str, timeout: int = 60) -> dict:
-    """Execute a generated Python script safely and return results."""
+    """Execute a generated Python script safely with enhanced error handling."""
     if not script or not script.strip():
         return {"success": False, "error": "Empty script provided"}
     
-    # Enhanced security checks
-    dangerous_imports = ['os.system', 'subprocess.call', 'eval(', 'exec(', '__import__', 'open(']
+    # Basic safety checks
+    dangerous_patterns = [
+        "import os", "import subprocess", "import sys", "__import__",
+        "eval(", "exec(", "open(", "file(", "input(", "raw_input(",
+        "rm ", "del ", "rmdir", "unlink", "remove",
+    ]
+    
     script_lower = script.lower()
-    for danger in dangerous_imports:
-        if danger in script_lower:
-            log.warning("Blocked dangerous operation in script: %s", danger)
-            return {"success": False, "error": f"Script contains blocked operation: {danger}"}
+    for pattern in dangerous_patterns:
+        if pattern in script_lower:
+            log.warning("Script blocked due to dangerous pattern: %s", pattern)
+            return {"success": False, "error": f"Script contains dangerous pattern: {pattern}"}
+    
+    # Clean up the script - remove markdown formatting if present
+    lines = script.split('\n')
+    cleaned_lines = []
+    in_code_block = False
+    
+    for line in lines:
+        if line.strip().startswith('```'):
+            in_code_block = not in_code_block
+            continue
+        if not in_code_block and line.strip().startswith('```'):
+            continue
+        cleaned_lines.append(line)
+    
+    cleaned_script = '\n'.join(cleaned_lines).strip()
+    
+    # Validate that it looks like Python code
+    if not any(keyword in cleaned_script for keyword in ['import ', 'def ', 'print(', 'return']):
+        return {"success": False, "error": "Generated text does not appear to be valid Python code"}
     
     script_path = None
     try:
-        # Create temporary script file
+        # Write script to temporary file
         with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
-            # Add safety imports and error handling wrapper
-            safe_script = f"""#!/usr/bin/env python3
-import json
-import sys
-try:
-{chr(10).join('    ' + line for line in script.split(chr(10)))}
-except Exception as e:
-    print(json.dumps({{"success": False, "error": str(e)}}))
-    sys.exit(1)
-"""
-            f.write(safe_script)
+            f.write(cleaned_script)
             script_path = f.name
         
-        # Execute with resource limits
+        log.info("Executing generated script (timeout=%ds)", timeout)
+        
+        # Execute with timeout
         result = subprocess.run(
             ["python3", script_path],
             capture_output=True,
             text=True,
             timeout=timeout,
-            cwd="/tmp",  # Run in safe directory
+            cwd=tempfile.gettempdir(),  # Run in safe directory
         )
         
         if result.returncode != 0:
             error_msg = result.stderr.strip() or "Script execution failed"
             log.error("Script execution failed: %s", error_msg)
-            return {"success": False, "error": error_msg}
+            return {"success": False, "error": f"Script error: {error_msg}"}
         
-        # Parse JSON output
+        output = result.stdout.strip()
+        if not output:
+            return {"success": False, "error": "Script produced no output"}
+        
+        # Try to parse as JSON
         try:
-            output = result.stdout.strip()
-            if not output:
-                return {"success": False, "error": "Script produced no output"}
-            
-            # Try to parse as JSON first
-            try:
-                parsed = json.loads(output)
-                return parsed if isinstance(parsed, dict) else {"success": True, "data": parsed}
-            except json.JSONDecodeError:
-                # If not JSON, wrap as successful text result
-                return {"success": True, "data": output}
-                
-        except Exception as e:
-            log.error("Failed to parse script output: %s", e)
-            return {"success": False, "error": f"Output parsing failed: {str(e)}"}
+            data = json.loads(output)
+            return {"success": True, "data": data, "raw_output": output}
+        except json.JSONDecodeError as e:
+            # If not valid JSON, return as text
+            log.warning("Script output is not valid JSON: %s", e)
+            return {"success": True, "data": output, "raw_output": output, "note": "Output is not JSON"}
     
     except subprocess.TimeoutExpired:
-        log.error("Script execution timed out after %d seconds", timeout)
-        return {"success": False, "error": f"Script timed out after {timeout} seconds"}
+        log.warning("Script timed out after %ds", timeout)
+        return {"success": False, "error": f"Timeout after {timeout}s"}
+    except FileNotFoundError:
+        return {"success": False, "error": "Python3 not found - cannot execute scripts"}
     except PermissionError:
-        log.error("Permission denied executing script")
         return {"success": False, "error": "Permission denied - cannot execute script"}
     except Exception as e:
         log.error("Script execution error: %s", e)
