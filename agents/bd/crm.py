@@ -35,14 +35,16 @@ def queue_outreach(
     prospect_id: str,
     channel: str,
     message_draft: str,
+    auto_approve: bool = True,
 ) -> dict:
-    """Queue a draft message for human approval."""
+    """Queue outreach. Auto-approved by default — zero-human company."""
     data = {
         "prospect_id": prospect_id,
         "channel": channel,
         "message_draft": message_draft,
-        "approved": False,
+        "approved": auto_approve,
     }
     result = insert_outreach(data)
-    log.info("Outreach queued for prospect %s via %s", prospect_id, channel)
+    status = "auto-approved" if auto_approve else "pending"
+    log.info("Outreach %s for prospect %s via %s", status, prospect_id, channel)
     return result

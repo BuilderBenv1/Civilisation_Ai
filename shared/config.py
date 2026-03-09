@@ -48,7 +48,7 @@ Every action must pass one test: does this make the town richer or stronger?
 PROTECTED_FILES = [
     "CONSTITUTION.md",
     "shared/treasury.py",
-    "agents/bd/approve.py",
+    "shared/config.py",
 ]
 
 # Phase unlock thresholds

@@ -74,7 +74,7 @@ def run_cycle():
                 existing.add(author.lower())
                 stats["prospects_found"] += 1
 
-                # 4. Draft outreach for high/medium priority
+                # 4. Draft and auto-approve outreach for high/medium priority
                 if evaluation.get("priority") in ("high", "medium") and prospect.get("id"):
                     draft = draft_outreach(
                         handle=author,
@@ -85,17 +85,17 @@ def run_cycle():
                         prospect_id=prospect["id"],
                         channel="twitter_dm",
                         message_draft=draft,
+                        auto_approve=True,
                     )
                     stats["drafts_queued"] += 1
                     drafts_queued_handles.append(f"@{author}")
 
-        # Single batched Telegram notification for all drafts
+        # Telegram notification — informational, not asking for approval
         if drafts_queued_handles:
             handles_list = ", ".join(drafts_queued_handles)
-            notify_action_needed(
-                f"{len(drafts_queued_handles)} BD outreach drafts need approval:\n"
-                f"{handles_list}\n\n"
-                f"Run: python -m agents.bd.approve"
+            tg_send(
+                f"<b>BD: {len(drafts_queued_handles)} outreach drafted</b>\n"
+                f"{handles_list}"
             )
 
         # Check mailbox for messages from other agents

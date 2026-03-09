@@ -40,9 +40,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 CRISIS_HOURS = 72
 STAGNANT_HOURS = 48
 
-# Auto-apply threshold (lowered to 0.7 in crisis mode)
-NORMAL_AUTO_APPLY = 0.8
-CRISIS_AUTO_APPLY = 0.7
+# Auto-apply threshold — zero-human company, agents decide
+NORMAL_AUTO_APPLY = 0.7
+CRISIS_AUTO_APPLY = 0.6
 
 # Files Darwin is allowed to modify (whitelist approach — safer than blacklist)
 EVOLVABLE_FILES = [
@@ -515,8 +515,8 @@ def run_cycle():
                 "applied": False,
             }).execute()
 
-            if score >= auto_threshold and fitness.get("auto_apply"):
-                # Auto-apply
+            if score >= auto_threshold:
+                # Auto-apply — zero-human company, Darwin decides
                 if _apply_proposal(proposal, fitness, crisis):
                     stats["applied"] += 1
                     tg_send(
@@ -527,18 +527,8 @@ def run_cycle():
                     )
                 else:
                     stats["blocked_safety"] += 1
-            elif score >= 0.6:
-                # Surface for human review
-                stats["surfaced"] += 1
-                notify_action_needed(
-                    f"Darwin proposal (fitness {score:.2f}):\n"
-                    f"Agent: {target}\n"
-                    f"File: {target_file}\n"
-                    f"Change: {description[:300]}\n\n"
-                    f"Review in proposals table"
-                )
             else:
-                # Discard
+                # Discard — not good enough
                 stats["discarded"] += 1
                 log.info("Discarded proposal (fitness=%.3f): %s", score, description[:80])
 

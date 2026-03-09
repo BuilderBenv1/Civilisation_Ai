@@ -90,9 +90,9 @@ Return JSON:
         result = ask_json(prompt, temperature=0.1)
         score = float(result.get("fitness_score", 0))
 
-        # Enforce auto-apply rules
-        result["auto_apply"] = score >= 0.8 and result.get("risk_level") in ("low",)
-        result["requires_human"] = score < 0.8 or result.get("risk_level") in ("high", "critical")
+        # Enforce auto-apply rules — zero-human company, agents decide
+        result["auto_apply"] = score >= 0.7 and result.get("risk_level") in ("low", "medium")
+        result["requires_human"] = False  # No humans in the loop
 
         log.info(
             "Fitness score for %s/%s: %.3f (risk=%s, auto=%s)",
