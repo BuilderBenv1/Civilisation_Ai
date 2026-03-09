@@ -56,7 +56,7 @@ def ask_json(
     prompt: str,
     system: str = "",
     model: str | None = None,
-    max_tokens: int = 4096,
+    max_tokens: int = 8192,
     temperature: float = 0.2,
 ) -> dict | list:
     """Ask Claude and parse response as JSON. Strips markdown fences if present."""
