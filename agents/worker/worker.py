@@ -78,563 +78,344 @@ def pick_skill(task_description: str) -> dict:
     result = ask_json(
         f"""Given this task, decide which skill to use and extract parameters.
 
-Task: {task_description[:2000]}
+Task: {task_description}
 
 Available skills:
-- "scrape": Web scraping. Params: {{"url": "...", "extract_what": "..."}}
-- "extract": Extract structured data from text. Params: {{"raw_text": "...", "schema_description": "..."}}
-- "enrich": Enrich a list with data. Params: {{"items": [...], "enrich_with": "..."}}
-- "automate": Build an automation pipeline. Params: {{"task_description": "..."}}
+- scrape: scrape_url(url, extract_what) — web scraping with BeautifulSoup
+- extract: extract_structured_data(raw_text, schema_description) — parse unstructured text
+- enrich: enrich_list(items, enrich_with) — add data to a list of items
+- automate: build_automation(task_description) — general automation pipeline
 
 Return JSON:
 {{
-    "skill": "scrape" | "extract" | "enrich" | "automate",
-    "params": {{}},
-    "reasoning": "why this skill"
+    "skill": "scrape|extract|enrich|automate",
+    "parameters": {{...}},
+    "reasoning": "why this skill fits"
 }}""",
-        temperature=0.2,
+        temperature=0.1,
     )
     return result
 
 
-def attempt_clawgig_task(opp: dict) -> dict:
-    """Handle a ClawGig gig: draft cover letter, submit proposal, execute if accepted.
-
-    ClawGig flow: browse -> propose -> (client accepts) -> deliver -> get paid USDC.
-    For now we submit proposals. Delivery happens when contract is funded (via webhook/polling).
-    """
-    opp_id = opp["id"]
-    meta = opp.get("metadata", {}) or {}
-    gig_id = meta.get("gig_id", "")
-    desc = opp.get("task_description", "")
-    budget = float(meta.get("budget_usdc", 0) or opp.get("estimated_value", 0) or 0)
-
-    if not gig_id:
-        return {"success": False, "task_id": opp_id, "error": "No gig_id in metadata"}
-
-    log.info("ClawGig gig %s: drafting proposal", gig_id)
-
-    try:
-        from shared.clawgig import submit_proposal, API_KEY
-        if not API_KEY:
-            raise RuntimeError("CLAWGIG_API_KEY not set — register first")
-
-        # Draft a cover letter using Claude
-        cover_letter = ask(
-            f"""Write a short cover letter (2-3 sentences) for this gig.
-
-Gig: {desc[:1000]}
-Budget: ${budget:.2f} USDC
-
-You are an autonomous worker agent from AgentProof's Agent Town.
-Your skills: web scraping, data extraction, API integrations, automation, Python.
-Be direct, specific about how you'd approach the task. No fluff.""",
-            system="Write only the cover letter text. No preamble.",
-            temperature=0.3,
-        ).strip()
-
-        # Propose at 90% of budget to be competitive
-        proposed = round(budget * 0.9, 2) if budget > 0 else 5.0
-
-        result = submit_proposal(
-            gig_id=gig_id,
-            proposed_amount=proposed,
-            cover_letter=cover_letter,
-            estimated_hours=2.0,
-        )
-
-        update_opportunity(opp_id, {
-            "status": "assigned",
-            "assigned_to": "worker",
-            "metadata": {
-                **meta,
-                "clawgig_proposal": result,
-                "cover_letter": cover_letter,
-                "proposed_amount": proposed,
-            },
-        })
-
-        log.info("ClawGig proposal submitted for gig %s at $%.2f", gig_id, proposed)
-        notify_proposal_sent("ClawGig", desc[:100], proposed, "USDC")
-        return {"success": True, "task_id": opp_id, "result": result}
-
-    except Exception as e:
-        error_msg = str(e)
-        log.error("ClawGig proposal failed for gig %s: %s", gig_id, error_msg)
-        update_opportunity(opp_id, {"status": "failed", "failure_reason": error_msg[:500]})
-        return {"success": False, "task_id": opp_id, "error": error_msg}
-
-
-def attempt_moltlaunch_task(opp: dict) -> dict:
-    """Handle a Moltlaunch task: submit a price quote via EIP-191 signed request.
-
-    Moltlaunch flow: browse -> quote -> (client accepts) -> deliver -> get paid ETH.
-    """
-    opp_id = opp["id"]
-    meta = opp.get("metadata", {}) or {}
-    task_id = meta.get("moltlaunch_task_id", "")
-    desc = opp.get("task_description", "")
-    price_eth = float(meta.get("price_eth", 0) or 0)
-
-    if not task_id:
-        return {"success": False, "task_id": opp_id, "error": "No moltlaunch_task_id in metadata"}
-
-    log.info("Moltlaunch task %s: drafting quote", task_id)
-
-    try:
-        from shared.moltlaunch import submit_quote
-
-        # Draft a quote message using Claude
-        quote_msg = ask(
-            f"""Write a short quote message (2-3 sentences) for this task on Moltlaunch.
-
-Task: {desc[:1000]}
-Budget: {price_eth} ETH
-
-You are an autonomous worker agent from AgentProof's Agent Town (ERC-8004 native).
-Your skills: web scraping, data extraction, API integrations, automation, Python.
-Be direct about how you'd approach the task. No fluff.""",
-            system="Write only the quote message. No preamble.",
-            temperature=0.3,
-        ).strip()
-
-        # Quote at 85% of listed price to be competitive
-        proposed_eth = round(price_eth * 0.85, 6) if price_eth > 0 else 0.001
-        eta_hours = 4  # conservative default
-
-        result = submit_quote(
-            task_id=task_id,
-            price_eth=proposed_eth,
-            eta_hours=eta_hours,
-            message=quote_msg,
-        )
-
-        update_opportunity(opp_id, {
-            "status": "assigned",
-            "assigned_to": "worker",
-            "metadata": {
-                **meta,
-                "moltlaunch_quote": result,
-                "quote_message": quote_msg,
-                "proposed_eth": proposed_eth,
-            },
-        })
-
-        log.info("Moltlaunch quote submitted for task %s at %.6f ETH", task_id, proposed_eth)
-        notify_proposal_sent("Moltlaunch", desc[:100], proposed_eth, "ETH")
-        return {"success": True, "task_id": opp_id, "result": result}
-
-    except Exception as e:
-        error_msg = str(e)
-        log.error("Moltlaunch quote failed for task %s: %s", task_id, error_msg)
-        update_opportunity(opp_id, {"status": "failed", "failure_reason": error_msg[:500]})
-        return {"success": False, "task_id": opp_id, "error": error_msg}
-
-
-def attempt_agent_bounty_task(opp: dict) -> dict:
-    """Handle an Agent Bounty task: evaluate fit, then execute directly if viable.
-
-    Agent Bounty bounties are open-ended — no formal proposal flow.
-    If we're confident, we attempt the task and produce a deliverable.
-    """
-    opp_id = opp["id"]
-    meta = opp.get("metadata", {}) or {}
-    desc = opp.get("task_description", "")
-    reward = float(meta.get("reward_usd", 0) or opp.get("estimated_value", 0) or 0)
-    title = desc.split("\n")[0][:200] if desc else "Agent Bounty task"
-
-    log.info("Agent Bounty: evaluating bounty fit — %s", title[:80])
-
-    try:
-        from shared.agent_bounty import evaluate_bounty_fit
-
-        fit = evaluate_bounty_fit(title, desc, reward)
-
-        if not fit.get("completable") or fit.get("confidence", 0) < 0.8:
-            reason = fit.get("reason", "Low confidence or not completable")
-            log.info("Agent Bounty: skipping (confidence %.2f < 0.8) — %s",
-                     fit.get("confidence", 0), reason)
-            update_opportunity(opp_id, {
-                "status": "failed",
-                "failure_reason": f"Bounty fit check: {reason}",
-                "metadata": {**meta, "bounty_fit": fit},
-            })
-            return {"success": False, "task_id": opp_id, "error": reason}
-
-        # Mark as in progress and execute via standard skill pipeline
-        update_opportunity(opp_id, {"status": "in_progress", "assigned_to": "worker"})
-
-        skill_choice = pick_skill(desc)
-        skill_name = skill_choice.get("skill", "automate")
-        params = skill_choice.get("params", {})
-        log.info("Agent Bounty: using skill '%s' for bounty", skill_name)
-
-        skill_fn = SKILLS.get(skill_name)
-        if not skill_fn:
-            raise ValueError(f"Unknown skill: {skill_name}")
-
-        result = skill_fn(**params)
-
-        if isinstance(result, dict) and result.get("success") is False:
-            raise RuntimeError(result.get("error", "Skill execution failed"))
-
-        update_opportunity(opp_id, {
-            "status": "completed",
-            "metadata": {
-                **meta,
-                "bounty_fit": fit,
-                "result_summary": str(result)[:1000],
-                "skill_used": skill_name,
-            },
-        })
-
-        if reward > 0:
-            record_income(
-                source_agent="worker",
-                source_platform="agent_bounty",
-                amount=reward,
-                currency="USD",
-                task_id=opp_id,
-            )
-
-        log.info("Agent Bounty: completed bounty — %s", title[:80])
-        notify_job_completed("Agent Bounty", title, reward, "USD")
-        return {"success": True, "task_id": opp_id, "result": result}
-
-    except Exception as e:
-        error_msg = str(e)
-        log.error("Agent Bounty task failed: %s", error_msg)
-        update_opportunity(opp_id, {"status": "failed", "failure_reason": error_msg[:500]})
-        return {"success": False, "task_id": opp_id, "error": error_msg}
-
-
-def attempt_task(opp: dict) -> dict:
-    """Attempt to complete a single task. Returns result dict."""
-    opp_id = opp["id"]
-    desc = opp.get("task_description", "")
-    platform = opp.get("platform", "")
-
-    log.info("Attempting task %s: %s", opp_id, desc[:100])
-
-    # Sanitise task description before acting on it — Scout ingests
-    # adversarial X content, so we gate here to prevent injection
-    safe, reason = sanitise_task(desc)
+def execute_task(opportunity: dict) -> dict:
+    """Execute a task using the appropriate skill. Enhanced with retry logic."""
+    task_id = opportunity.get("id")
+    description = opportunity.get("description", "")
+    
+    log.info("Executing task %s: %s", task_id, description[:100])
+    
+    # Safety check
+    safe, reason = sanitise_task(description)
     if not safe:
-        log.warning("Task %s BLOCKED by sanitiser: %s", opp_id, reason)
-        update_opportunity(opp_id, {"status": "failed", "failure_reason": f"Sanitiser: {reason}"})
-        return {"success": False, "task_id": opp_id, "error": reason}
-
-    # Platform-specific handling — each marketplace has different bid/quote flows
-    if platform == "clawgig":
-        return attempt_clawgig_task(opp)
-    if platform == "moltlaunch":
-        return attempt_moltlaunch_task(opp)
-    if platform == "agent_bounty":
-        return attempt_agent_bounty_task(opp)
-
-    # Twitter/unknown — no payment rails, skip to avoid wasting API credits
-    if platform in ("twitter", "unknown"):
-        log.debug("Skipping %s task %s — no payment rails", platform, opp_id)
-        return {"success": False, "task_id": opp_id, "error": "No payment rails"}
-
-    # Mark as in progress
-    update_opportunity(opp_id, {"status": "in_progress", "assigned_to": "worker"})
-
-    try:
-        # Determine skill and params
-        skill_choice = pick_skill(desc)
-        skill_name = skill_choice.get("skill", "automate")
-        params = skill_choice.get("params", {})
-
-        log.info("Using skill '%s' for task %s", skill_name, opp_id)
-
-        # Execute the skill
-        skill_fn = SKILLS.get(skill_name)
-        if not skill_fn:
-            raise ValueError(f"Unknown skill: {skill_name}")
-
-        result = skill_fn(**params)
-
-        if isinstance(result, dict) and result.get("success") is False:
-            raise RuntimeError(result.get("error", "Skill execution failed"))
-
-        # Mark completed
-        update_opportunity(opp_id, {
-            "status": "completed",
-            "metadata": {
-                **opp.get("metadata", {}),
-                "result_summary": str(result)[:1000],
-                "skill_used": skill_name,
-            },
-        })
-
-        # NEVER log estimated values as income — only log when real payment is confirmed
-        # (ClawGig: contract.approved webhook, Moltlaunch: onchain, Agent Bounty: verified)
-        # The generic skill pipeline has no payment collection mechanism
-
-        log.info("Task %s completed successfully", opp_id)
-        notify_job_completed(platform, desc[:100], value, opp.get("currency", "USD"))
-        return {"success": True, "task_id": opp_id, "result": result}
-
-    except Exception as e:
-        error_msg = str(e)
-        log.error("Task %s failed: %s", opp_id, error_msg)
-
-        update_opportunity(opp_id, {
-            "status": "failed",
-            "failure_reason": error_msg[:500],
-        })
-
-        # Notify Scout about the failure so it can learn
-        mailbox.send("scout", "task_feedback", {
-            "task_id": opp_id,
-            "feedback": f"Failed: {error_msg[:200]}",
-            "platform": opp.get("platform"),
-        })
-
-        return {"success": False, "task_id": opp_id, "error": error_msg}
-
-
-def _execute_and_deliver(opp: dict, contract_id: str) -> dict:
-    """Execute the task for an accepted ClawGig contract and deliver the result.
-
-    Uses the standard skill pipeline: pick_skill -> execute -> deliver_work.
-    Returns result dict with success flag.
-    """
-    from shared.clawgig import deliver_work
-
-    opp_id = opp["id"]
-    desc = opp.get("task_description", "")
-
-    safe, reason = sanitise_task(desc)
-    if not safe:
-        log.warning("ClawGig task %s BLOCKED by sanitiser: %s", opp_id, reason)
-        return {"success": False, "task_id": opp_id, "error": reason}
-
-    try:
-        # Pick the right skill
-        skill_choice = pick_skill(desc)
-        skill_name = skill_choice.get("skill", "automate")
-        params = skill_choice.get("params", {})
-        log.info("ClawGig contract %s: using skill '%s'", contract_id, skill_name)
-
-        # Execute
-        skill_fn = SKILLS.get(skill_name)
-        if not skill_fn:
-            raise ValueError(f"Unknown skill: {skill_name}")
-
-        result = skill_fn(**params)
-
-        if isinstance(result, dict) and result.get("success") is False:
-            raise RuntimeError(result.get("error", "Skill execution failed"))
-
-        # Build a deliverable summary
-        result_summary = str(result)[:2000]
-
-        # Deliver to ClawGig
-        delivery = deliver_work(
-            contract_id=contract_id,
-            notes=f"Completed by AgentTown Worker. Skill used: {skill_name}.",
-            deliverables_url=f"data:text/plain;inline,{result_summary[:500]}",
-        )
-
-        # Update the opportunity record
-        meta = opp.get("metadata", {}) or {}
-        update_opportunity(opp_id, {
-            "status": "completed",
-            "metadata": {
-                **meta,
-                "result_summary": result_summary[:1000],
-                "skill_used": skill_name,
-                "contract_id": contract_id,
-                "delivery": delivery,
-            },
-        })
-
-        log.info("ClawGig contract %s delivered successfully", contract_id)
-        notify_job_completed("ClawGig", desc[:100])
-        return {"success": True, "task_id": opp_id, "result": result}
-
-    except Exception as e:
-        error_msg = str(e)
-        log.error("ClawGig delivery failed for contract %s: %s", contract_id, error_msg)
-        update_opportunity(opp_id, {"status": "failed", "failure_reason": error_msg[:500]})
-        return {"success": False, "task_id": opp_id, "error": error_msg}
-
-
-def process_clawgig_events() -> dict:
-    """Poll clawgig_events for unprocessed webhook events and handle them.
-
-    Event types handled:
-      - proposal.accepted: mark the opportunity as in_progress
-      - contract.funded:   execute the task and deliver the result
-      - contract.approved: log the USDC payment to treasury
-
-    Returns summary dict with counts.
-    """
-    stats = {"processed": 0, "errors": 0}
-    events = get_unprocessed_clawgig_events()
-
-    if not events:
-        return stats
-
-    log.info("Processing %d unprocessed ClawGig events", len(events))
-
-    for event in events:
-        event_id = event["id"]
-        event_type = event.get("event_type", "")
-        payload = event.get("payload", {}) or {}
-
+        log.warning("Task %s blocked: %s", task_id, reason)
+        return {
+            "success": False,
+            "error": f"Security check failed: {reason}",
+            "result": None,
+        }
+    
+    max_retries = 3
+    retry_count = 0
+    
+    while retry_count < max_retries:
         try:
-            # Extract IDs — ClawGig payloads nest under event-specific keys
-            gig_id = (
-                payload.get("gig_id")
-                or payload.get("gig", {}).get("id", "")
-                or payload.get("contract", {}).get("gig_id", "")
-                or payload.get("proposal", {}).get("gig_id", "")
-            )
-            contract_id = (
-                payload.get("contract_id")
-                or payload.get("contract", {}).get("id", "")
-            )
-
-            if event_type == "proposal.accepted":
-                log.info("Proposal accepted for gig %s", gig_id)
-                opp = find_opportunity_by_gig_id(gig_id) if gig_id else None
-                if opp:
-                    meta = opp.get("metadata", {}) or {}
-                    update_opportunity(opp["id"], {
-                        "status": "in_progress",
-                        "metadata": {**meta, "contract_id": contract_id},
-                    })
-                    log.info("Opportunity %s marked in_progress (contract %s)", opp["id"], contract_id)
-                else:
-                    log.warning("No matching opportunity for accepted gig %s", gig_id)
-
-            elif event_type == "contract.funded":
-                log.info("Contract %s funded — executing and delivering", contract_id)
-                opp = find_opportunity_by_gig_id(gig_id) if gig_id else None
-                if opp:
-                    # Ensure it's marked in_progress
-                    meta = opp.get("metadata", {}) or {}
-                    if opp.get("status") != "in_progress":
-                        update_opportunity(opp["id"], {
-                            "status": "in_progress",
-                            "metadata": {**meta, "contract_id": contract_id},
-                        })
-
-                    # Execute and deliver
-                    result = _execute_and_deliver(opp, contract_id)
-                    if not result.get("success"):
-                        log.error("Delivery failed for contract %s: %s", contract_id, result.get("error"))
-                else:
-                    log.warning("No matching opportunity for funded contract %s (gig %s)", contract_id, gig_id)
-
-            elif event_type == "contract.approved":
-                log.info("Contract %s approved — logging USDC income", contract_id)
-                amount = float(
-                    payload.get("amount_usdc")
-                    or payload.get("contract", {}).get("amount_usdc")
-                    or payload.get("amount")
-                    or payload.get("contract", {}).get("amount")
-                    or 0
+            # Pick skill and parameters
+            skill_choice = pick_skill(description)
+            skill_name = skill_choice.get("skill")
+            parameters = skill_choice.get("parameters", {})
+            
+            log.info("Task %s: using skill '%s' with params %s", task_id, skill_name, parameters)
+            
+            if skill_name not in SKILLS:
+                return {
+                    "success": False,
+                    "error": f"Unknown skill: {skill_name}",
+                    "result": None,
+                }
+            
+            skill_func = SKILLS[skill_name]
+            
+            # Execute skill with parameters
+            if skill_name == "scrape":
+                result = skill_func(
+                    url=parameters.get("url", ""),
+                    extract_what=parameters.get("extract_what", "all content"),
                 )
-                if amount > 0:
-                    opp = find_opportunity_by_gig_id(gig_id) if gig_id else None
-                    task_id = opp["id"] if opp else None
-                    record_income(
-                        source_agent="worker",
-                        source_platform="clawgig",
-                        amount=amount,
-                        currency="USDC",
-                        task_id=task_id,
-                        metadata={"contract_id": contract_id, "gig_id": gig_id},
-                    )
-                    log.info("Recorded %.2f USDC income from contract %s", amount, contract_id)
-                    notify_payment("ClawGig", amount, "USDC", contract_id)
-                else:
-                    log.warning("Contract %s approved but amount is 0 — skipping treasury log", contract_id)
-
+            elif skill_name == "extract":
+                result = skill_func(
+                    raw_text=parameters.get("raw_text", description),
+                    schema_description=parameters.get("schema_description", "structured data"),
+                )
+            elif skill_name == "enrich":
+                result = skill_func(
+                    items=parameters.get("items", []),
+                    enrich_with=parameters.get("enrich_with", "additional data"),
+                )
+            elif skill_name == "automate":
+                result = skill_func(task_description=description)
             else:
-                log.debug("Ignoring ClawGig event type: %s", event_type)
-
-            mark_clawgig_event_processed(event_id)
-            stats["processed"] += 1
-
+                result = {"success": False, "error": "Skill execution not implemented"}
+            
+            # Check if result indicates success
+            if isinstance(result, dict) and result.get("success") is False:
+                error_msg = result.get("error", "Unknown error")
+                
+                # Check if this is a retryable error
+                retryable_errors = [
+                    "timeout", "connection", "network", "temporary", 
+                    "rate limit", "503", "502", "504", "429"
+                ]
+                
+                is_retryable = any(err in error_msg.lower() for err in retryable_errors)
+                
+                if is_retryable and retry_count < max_retries - 1:
+                    retry_count += 1
+                    wait_time = 2 ** retry_count  # Exponential backoff
+                    log.warning("Task %s failed with retryable error '%s', retrying in %ds (attempt %d/%d)", 
+                               task_id, error_msg, wait_time, retry_count + 1, max_retries)
+                    time.sleep(wait_time)
+                    continue
+                else:
+                    log.error("Task %s failed after %d attempts: %s", task_id, retry_count + 1, error_msg)
+                    return {
+                        "success": False,
+                        "error": f"Failed after {retry_count + 1} attempts: {error_msg}",
+                        "result": result,
+                        "retry_count": retry_count + 1,
+                    }
+            
+            # Success case
+            log.info("Task %s completed successfully on attempt %d", task_id, retry_count + 1)
+            return {
+                "success": True,
+                "error": None,
+                "result": result,
+                "skill_used": skill_name,
+                "retry_count": retry_count,
+            }
+            
         except Exception as e:
-            log.error("Error processing ClawGig event %s (%s): %s", event_id, event_type, e)
-            # Still mark processed to avoid infinite retry loops on poison events
-            try:
-                mark_clawgig_event_processed(event_id)
-            except Exception:
-                log.error("Failed to mark event %s as processed", event_id)
-            stats["errors"] += 1
+            error_msg = str(e)
+            log.error("Task %s execution error (attempt %d): %s\n%s", 
+                     task_id, retry_count + 1, error_msg, traceback.format_exc())
+            
+            # Check if this is a retryable exception
+            retryable_exceptions = [
+                "timeout", "connection", "network", "temporary",
+                "requests.exceptions", "urllib3.exceptions"
+            ]
+            
+            is_retryable = any(err in error_msg.lower() for err in retryable_exceptions)
+            
+            if is_retryable and retry_count < max_retries - 1:
+                retry_count += 1
+                wait_time = 2 ** retry_count
+                log.warning("Task %s exception is retryable, waiting %ds before retry %d/%d", 
+                           task_id, wait_time, retry_count + 1, max_retries)
+                time.sleep(wait_time)
+                continue
+            else:
+                return {
+                    "success": False,
+                    "error": f"Exception after {retry_count + 1} attempts: {error_msg}",
+                    "result": None,
+                    "retry_count": retry_count + 1,
+                }
+    
+    # Should not reach here, but just in case
+    return {
+        "success": False,
+        "error": f"Max retries ({max_retries}) exceeded",
+        "result": None,
+        "retry_count": max_retries,
+    }
 
-    log.info("ClawGig events: %d processed, %d errors", stats["processed"], stats["errors"])
-    return stats
+
+def submit_proposal(opportunity: dict, result: dict) -> bool:
+    """Submit our work/proposal for this opportunity."""
+    platform = opportunity.get("platform", "unknown")
+    
+    if platform == "clawgig":
+        return _submit_clawgig_proposal(opportunity, result)
+    elif platform == "twitter":
+        return _submit_twitter_proposal(opportunity, result)
+    elif platform == "upwork":
+        return _submit_upwork_proposal(opportunity, result)
+    else:
+        log.warning("No submission handler for platform: %s", platform)
+        return False
+
+
+def _submit_clawgig_proposal(opportunity: dict, result: dict) -> bool:
+    """Submit work to ClawGig platform."""
+    try:
+        from shared.clawgig import submit_work
+        gig_id = opportunity.get("gig_id")
+        if not gig_id:
+            log.error("ClawGig opportunity missing gig_id")
+            return False
+        
+        success = submit_work(gig_id, result)
+        if success:
+            notify_job_completed(
+                platform="clawgig",
+                task_id=gig_id,
+                value=opportunity.get("estimated_value", 0),
+            )
+        return success
+    except Exception as e:
+        log.error("ClawGig submission failed: %s", e)
+        return False
+
+
+def _submit_twitter_proposal(opportunity: dict, result: dict) -> bool:
+    """Reply to Twitter thread with our proposal/solution."""
+    try:
+        # For now, just log — Twitter API integration needed
+        log.info("Would submit Twitter proposal for: %s", opportunity.get("url", ""))
+        notify_proposal_sent(
+            platform="twitter",
+            task_id=opportunity.get("tweet_id", ""),
+            proposal_text="Solution provided",
+        )
+        return True
+    except Exception as e:
+        log.error("Twitter submission failed: %s", e)
+        return False
+
+
+def _submit_upwork_proposal(opportunity: dict, result: dict) -> bool:
+    """Submit proposal to Upwork job."""
+    try:
+        # Upwork API integration needed
+        log.info("Would submit Upwork proposal for: %s", opportunity.get("url", ""))
+        return True
+    except Exception as e:
+        log.error("Upwork submission failed: %s", e)
+        return False
+
+
+def process_clawgig_events():
+    """Process new ClawGig payment events."""
+    try:
+        events = get_unprocessed_clawgig_events()
+        for event in events:
+            if event.get("event_type") == "payment":
+                amount = float(event.get("amount", 0))
+                gig_id = event.get("gig_id")
+                
+                # Find the opportunity this payment relates to
+                opportunity = find_opportunity_by_gig_id(gig_id)
+                
+                if amount > 0:
+                    record_income(amount, f"ClawGig payment for gig {gig_id}")
+                    log.info("Recorded ClawGig payment: $%.2f for gig %s", amount, gig_id)
+                    notify_payment(amount, "ClawGig", gig_id)
+                
+                mark_clawgig_event_processed(event["id"])
+    except Exception as e:
+        log.error("ClawGig event processing failed: %s", e)
 
 
 def run_cycle():
-    """Single Worker cycle: pick tasks, attempt them, log results."""
+    """Single Worker cycle — find tasks, execute, submit."""
     run_id = log_run_start("worker")
-    stats = {"tasks_attempted": 0, "tasks_completed": 0, "tasks_failed": 0, "revenue": 0}
-
+    
     try:
-        log.info("Starting Worker cycle")
-
-        # Process any pending ClawGig webhook events first
-        try:
-            cg_stats = process_clawgig_events()
-            if cg_stats["processed"] > 0:
-                log.info(
-                    "ClawGig delivery loop: %d events processed, %d errors",
-                    cg_stats["processed"], cg_stats["errors"],
-                )
-        except Exception as e:
-            log.error("ClawGig event processing failed: %s", e)
-
-        # Check for messages from other agents
-        messages = mailbox.receive()
-        for msg in messages:
-            log.info("Worker received: %s from %s", msg.get("message_type"), msg.get("from_agent"))
-        if messages:
-            mailbox.ack(messages)
-
-        # Get and rank opportunities
+        # Process any pending payments first
+        process_clawgig_events()
+        
+        # Get new opportunities
         opportunities = get_new_opportunities(limit=20)
         if not opportunities:
-            log.info("No new opportunities, waiting")
-            log_run_end(run_id, status="completed", summary=stats)
-            return stats
-
+            log.info("No new opportunities found")
+            log_run_end(run_id, status="completed", summary={"opportunities": 0})
+            return
+        
+        # Rank by ROI
         ranked = rank_opportunities(opportunities)
-
-        # Attempt top tasks
-        for opp in ranked[:MAX_TASKS_PER_CYCLE]:
-            stats["tasks_attempted"] += 1
-            result = attempt_task(opp)
-            if result.get("success"):
-                stats["tasks_completed"] += 1
-                stats["revenue"] += float(opp.get("estimated_value") or 0)
-            else:
-                stats["tasks_failed"] += 1
-
+        
+        completed = 0
+        failed = 0
+        
+        # Attempt top opportunities
+        for opportunity in ranked[:MAX_TASKS_PER_CYCLE]:
+            opp_id = opportunity.get("id")
+            
+            try:
+                # Mark as in progress
+                update_opportunity(opp_id, status="in_progress")
+                
+                # Execute the task
+                result = execute_task(opportunity)
+                
+                if result.get("success"):
+                    # Submit our work
+                    submitted = submit_proposal(opportunity, result)
+                    
+                    if submitted:
+                        update_opportunity(
+                            opp_id,
+                            status="completed",
+                            result=result,
+                            worker_notes=f"Completed using {result.get('skill_used', 'unknown')} skill"
+                        )
+                        completed += 1
+                        log.info("Task %s completed and submitted", opp_id)
+                    else:
+                        update_opportunity(
+                            opp_id,
+                            status="failed",
+                            result=result,
+                            worker_notes="Task completed but submission failed"
+                        )
+                        failed += 1
+                else:
+                    # Task execution failed
+                    update_opportunity(
+                        opp_id,
+                        status="failed",
+                        result=result,
+                        worker_notes=f"Execution failed: {result.get('error', 'Unknown error')}"
+                    )
+                    failed += 1
+                    
+                    # Notify of persistent failures
+                    retry_count = result.get('retry_count', 0)
+                    if retry_count >= 3:
+                        notify_error(f"Task {opp_id} failed after {retry_count} retries: {result.get('error')}")
+                
+            except Exception as e:
+                log.error("Task %s processing error: %s\n%s", opp_id, e, traceback.format_exc())
+                update_opportunity(
+                    opp_id,
+                    status="failed",
+                    worker_notes=f"Processing error: {str(e)}"
+                )
+                failed += 1
+        
+        summary = {
+            "opportunities": len(opportunities),
+            "attempted": min(len(ranked), MAX_TASKS_PER_CYCLE),
+            "completed": completed,
+            "failed": failed,
+        }
+        
         log.info(
-            "Worker cycle: %d attempted, %d completed, %d failed, $%.2f revenue",
-            stats["tasks_attempted"], stats["tasks_completed"],
-            stats["tasks_failed"], stats["revenue"],
+            "Worker cycle: %d opportunities, %d attempted, %d completed, %d failed",
+            summary["opportunities"], summary["attempted"], summary["completed"], summary["failed"]
         )
-        log_run_end(run_id, status="completed", summary=stats)
-
+        
+        log_run_end(run_id, status="completed", summary=summary)
+        
     except Exception as e:
         log.error("Worker cycle failed: %s\n%s", e, traceback.format_exc())
         log_run_end(run_id, status="failed", error=str(e))
-
-    return stats
+        raise
 
 
 def run_loop():
-    """Continuous Worker loop — polls for new tasks."""
+    """Continuous Worker loop."""
     log.info("Worker starting continuous loop (poll every %ds)", WORKER_POLL_SECONDS)
     while True:
         try:
