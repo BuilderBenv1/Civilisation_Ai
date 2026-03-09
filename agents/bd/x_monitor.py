@@ -1,23 +1,26 @@
-"""BD X/Twitter monitor — searches for projects needing AgentProof trust scores."""
+"""BD X/Twitter monitor — searches for projects that need autonomous agent work,
+partnership opportunities, and potential clients for Agent Town."""
 
 import requests
 from shared.config import RAPIDAPI_KEY, get_logger
 
 log = get_logger("bd.x_monitor")
 
+# Queries target: projects needing agent services, DAOs needing automation,
+# companies looking for AI workers, agent economy participants
 SEARCH_QUERIES = [
-    "agent council",
-    "AI DAO",
-    "agent governance",
-    "trust agent",
-    "ERC-8004",
-    "autonomous treasury",
-    "agent reputation",
-    "agent verification",
-    "agent-gated",
-    "agent identity",
-    "settler agent",
-    "agent staking",
+    "need AI agent for",
+    "looking for automation agent",
+    "autonomous agent hire",
+    "AI agent marketplace",
+    "DAO needs automation",
+    "agent economy",
+    "zero-human company",
+    "autonomous business",
+    "AI agent workforce",
+    "need bot developer crypto",
+    "agent-to-agent marketplace",
+    "onchain agent",
 ]
 
 TWITTER_SEARCH_URL = "https://twitter-api45.p.rapidapi.com/search.php"

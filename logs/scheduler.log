@@ -324,3 +324,10 @@
 2026-03-09 15:42:57 [agent_town.scheduler] INFO [darwin] Running post-Scout cycle
 2026-03-09 15:43:27 [agent_town.scheduler] INFO [darwin] Post-Scout cycle complete
 2026-03-09 15:44:19 [agent_town.scheduler] INFO [darwin] Cycle complete, sleeping 21600s
+2026-03-09 15:50:37 [agent_town.scheduler] INFO ============================================================
+2026-03-09 15:50:37 [agent_town.scheduler] INFO AGENT TOWN SCHEDULER STARTING
+2026-03-09 15:50:37 [agent_town.scheduler] INFO ============================================================
+2026-03-09 15:50:37 [agent_town.scheduler] INFO Scout interval: 7200s
+2026-03-09 15:50:37 [agent_town.scheduler] INFO BD interval: 7200s
+2026-03-09 15:50:37 [agent_town.scheduler] INFO Worker poll: 60s
+2026-03-09 15:55:12 [agent_town.scheduler] INFO [bd] Cycle complete, sleeping 7200s

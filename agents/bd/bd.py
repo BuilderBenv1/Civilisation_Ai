@@ -1,7 +1,10 @@
-"""BD Agent — finds projects needing AgentProof trust scores and drafts outreach.
+"""BD Agent — finds clients and partnerships for Agent Town.
+
+Agent Town is a hireable autonomous workforce. BD finds projects, DAOs,
+and companies that need agent services and drafts outreach.
 
 Runs on a 2-hour cycle:
-1. Scan X for relevant conversations
+1. Scan X for projects needing autonomous agent work
 2. Evaluate each as a prospect via Claude
 3. Add qualified prospects to CRM
 4. Draft outreach for new prospects (queued for human approval)
@@ -35,7 +38,7 @@ def run_cycle():
     drafts_queued_handles = []
 
     try:
-        # 1. Scan X/Twitter
+        # 1. Scan X/Twitter for potential clients
         log.info("Starting BD scan cycle")
         tweets = scan_all_queries()
         stats["tweets_scanned"] = len(tweets)
@@ -60,7 +63,7 @@ def run_cycle():
                     f"Tweet: {tweet['text'][:500]}\n"
                     f"Matched query: {tweet.get('matched_query', '')}\n"
                     f"Evaluation: {evaluation.get('reason', '')}\n"
-                    f"Integration angle: {evaluation.get('integration_angle', '')}"
+                    f"Service angle: {evaluation.get('service_angle', '')}"
                 )
                 prospect = add_prospect(
                     handle=author,
@@ -114,55 +117,13 @@ def run_cycle():
         raise
 
 
-def seed_quantu_prospect():
-    """First live task: seed Quantu as a prospect and draft outreach."""
-    log.info("Seeding Quantu prospect")
-
-    context = (
-        "Quantu (@Quantu_AI) announced an agent economy layer on Solana:\n"
-        "- Agent identity registry (ERC-8004 on Solana)\n"
-        "- Perp DEX for agents\n"
-        "- Settlers who execute trades, stake $QX, build reputation\n"
-        "- Structured feedback written to agent identities after each trade\n"
-        "- Testnet launching end of March 2026\n\n"
-        "Integration angle: Quantu settlers need trust scores. Their trading agents "
-        "produce feedback that needs independent verification. AgentProof is the scoring "
-        "layer that makes settler reputation legible to the rest of the EVM ecosystem."
-    )
-
-    prospect = add_prospect(
-        handle="Quantu_AI",
-        platform="twitter",
-        context=context,
-        notes="Priority: high. First BD target. ERC-8004 shared spec. Testnet end of March.",
-    )
-
-    if prospect.get("id"):
-        draft = draft_outreach(
-            handle="Quantu_AI",
-            context=context,
-            channel="twitter_dm",
-        )
-        queue_outreach(
-            prospect_id=prospect["id"],
-            channel="twitter_dm",
-            message_draft=draft,
-        )
-        log.info("Quantu outreach queued for approval")
-    else:
-        log.error("Failed to create Quantu prospect")
-
-
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="BD Agent")
-    parser.add_argument("--seed-quantu", action="store_true", help="Seed Quantu as first prospect")
     parser.add_argument("--cycle", action="store_true", help="Run one BD cycle")
     args = parser.parse_args()
 
-    if args.seed_quantu:
-        seed_quantu_prospect()
-    elif args.cycle:
+    if args.cycle:
         run_cycle()
     else:
-        print("Usage: python -m agents.bd.bd --seed-quantu | --cycle")
+        print("Usage: python -m agents.bd.bd --cycle")
