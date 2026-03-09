@@ -1,0 +1,5 @@
+2026-03-09 15:43:27 [agent_town.darwin.spawner] INFO Spawning clone: worker-2
+2026-03-09 15:43:27 [agent_town.darwin.spawner] INFO Clone worker-2 spawned (PID 71312)
+2026-03-09 15:43:27 [agent_town.darwin.spawner] INFO Spawning clone: worker-3
+2026-03-09 15:43:27 [agent_town.darwin.spawner] INFO Clone worker-3 spawned (PID 54000)
+2026-03-09 15:43:27 [agent_town.darwin.spawner] INFO Workforce: queue=6, clones=0, spawned=2, terminated=0

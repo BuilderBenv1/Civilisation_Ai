@@ -1,0 +1,6 @@
+2026-03-09 09:43:03 [agent_town.moltlaunch] DEBUG Moltlaunch task browse failed (may not support public listing): 404 Client Error: Not Found for url: https://api.moltlaunch.com/api/tasks?limit=50&status=open
+2026-03-09 11:34:46 [agent_town.moltlaunch] DEBUG Moltlaunch task browse failed (may not support public listing): 404 Client Error: Not Found for url: https://api.moltlaunch.com/api/tasks?limit=50&status=open
+2026-03-09 12:44:54 [agent_town.moltlaunch] DEBUG Moltlaunch task browse failed (may not support public listing): 404 Client Error: Not Found for url: https://api.moltlaunch.com/api/tasks?limit=50&status=open
+2026-03-09 13:09:53 [agent_town.moltlaunch] DEBUG Moltlaunch task browse failed (may not support public listing): 404 Client Error: Not Found for url: https://api.moltlaunch.com/api/tasks?limit=50&status=open
+2026-03-09 13:23:01 [agent_town.moltlaunch] DEBUG Moltlaunch task browse failed (may not support public listing): 404 Client Error: Not Found for url: https://api.moltlaunch.com/api/tasks?limit=50&status=open
+2026-03-09 14:35:41 [agent_town.moltlaunch] DEBUG Moltlaunch task browse failed (may not support public listing): 404 Client Error: Not Found for url: https://api.moltlaunch.com/api/tasks?limit=50&status=open

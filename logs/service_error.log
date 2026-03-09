@@ -1,0 +1,854 @@
+2026-03-09 08:44:56 [agent_town.scheduler] INFO ============================================================
+2026-03-09 08:44:56 [agent_town.scheduler] INFO AGENT TOWN SCHEDULER STARTING
+2026-03-09 08:44:56 [agent_town.scheduler] INFO ============================================================
+2026-03-09 08:44:56 [agent_town.scheduler] INFO Scout interval: 7200s
+2026-03-09 08:44:56 [agent_town.scheduler] INFO BD interval: 7200s
+2026-03-09 08:44:56 [agent_town.scheduler] INFO Worker poll: 60s
+2026-03-09 08:45:09 [agent_town.scheduler] INFO [scout] Running cycle
+2026-03-09 08:45:09 [agent_town.scheduler] INFO [scout] Agent thread started
+2026-03-09 08:45:09 [agent_town.scheduler] INFO [worker] Agent thread started
+2026-03-09 08:45:09 [agent_town.scheduler] INFO [bd] Running cycle
+2026-03-09 08:45:09 [agent_town.scheduler] INFO [bd] Agent thread started
+2026-03-09 08:45:09 [agent_town.scheduler] INFO Weekly report scheduled for Monday 08:00 UK
+2026-03-09 08:45:09 [agent_town.scheduler] INFO All agents launched. Entering main loop.
+2026-03-09 08:45:10 [agent_town.supabase] INFO Supabase client initialized
+2026-03-09 08:45:10 [agent_town.supabase] INFO Supabase client initialized
+2026-03-09 08:45:10 [agent_town.supabase] INFO Supabase client initialized
+2026-03-09 08:45:11 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 08:45:11 [agent_town.scout] INFO Starting Scout scan cycle
+2026-03-09 08:45:11 [agent_town.bd] INFO Starting BD scan cycle
+2026-03-09 08:45:11 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 08:45:12 [agent_town.scout.x_monitor] INFO Scout X search 'looking for agent to': found 20 tweets
+2026-03-09 08:45:12 [agent_town.scout.x_monitor] INFO Scout X search 'looking for agent to': found 20 tweets
+2026-03-09 08:45:13 [agent_town.bd.x_monitor] INFO X search 'agent council': found 20 tweets
+2026-03-09 08:45:13 [agent_town.bd.x_monitor] INFO X search 'agent council': found 20 tweets
+2026-03-09 08:45:14 [agent_town.scout.x_monitor] INFO Scout X search 'need automation for': found 20 tweets
+2026-03-09 08:45:14 [agent_town.scout.x_monitor] INFO Scout X search 'need automation for': found 20 tweets
+2026-03-09 08:45:14 [agent_town.bd.x_monitor] INFO X search 'AI DAO': found 17 tweets
+2026-03-09 08:45:14 [agent_town.bd.x_monitor] INFO X search 'AI DAO': found 17 tweets
+2026-03-09 08:45:15 [agent_town.scout.x_monitor] INFO Scout X search 'agent marketplace': found 20 tweets
+2026-03-09 08:45:15 [agent_town.scout.x_monitor] INFO Scout X search 'agent marketplace': found 20 tweets
+2026-03-09 08:45:16 [agent_town.bd.x_monitor] INFO X search 'agent governance': found 20 tweets
+2026-03-09 08:45:16 [agent_town.bd.x_monitor] INFO X search 'agent governance': found 20 tweets
+2026-03-09 08:45:17 [agent_town.scout.x_monitor] INFO Scout X search 'a2a task': found 20 tweets
+2026-03-09 08:45:17 [agent_town.scout.x_monitor] INFO Scout X search 'a2a task': found 20 tweets
+2026-03-09 08:45:17 [agent_town.bd.x_monitor] INFO X search 'trust agent': found 20 tweets
+2026-03-09 08:45:17 [agent_town.bd.x_monitor] INFO X search 'trust agent': found 20 tweets
+2026-03-09 08:45:18 [agent_town.scout.x_monitor] INFO Scout X search 'hiring bot developer': found 19 tweets
+2026-03-09 08:45:18 [agent_town.scout.x_monitor] INFO Scout X search 'hiring bot developer': found 19 tweets
+2026-03-09 08:45:19 [agent_town.bd.x_monitor] INFO X search 'ERC-8004': found 20 tweets
+2026-03-09 08:45:19 [agent_town.bd.x_monitor] INFO X search 'ERC-8004': found 20 tweets
+2026-03-09 08:45:20 [agent_town.scout.x_monitor] INFO Scout X search 'need scraping done': found 20 tweets
+2026-03-09 08:45:20 [agent_town.scout.x_monitor] INFO Scout X search 'need scraping done': found 20 tweets
+2026-03-09 08:45:20 [agent_town.bd.x_monitor] INFO X search 'autonomous treasury': found 20 tweets
+2026-03-09 08:45:20 [agent_town.bd.x_monitor] INFO X search 'autonomous treasury': found 20 tweets
+2026-03-09 08:45:21 [agent_town.bd.x_monitor] INFO X search 'agent reputation': found 20 tweets
+2026-03-09 08:45:21 [agent_town.bd.x_monitor] INFO X search 'agent reputation': found 20 tweets
+2026-03-09 08:45:22 [agent_town.scout.x_monitor] INFO Scout X search 'data extraction project': found 18 tweets
+2026-03-09 08:45:22 [agent_town.scout.x_monitor] INFO Scout X search 'data extraction project': found 18 tweets
+2026-03-09 08:45:22 [agent_town.bd.x_monitor] INFO X search 'agent verification': found 20 tweets
+2026-03-09 08:45:22 [agent_town.bd.x_monitor] INFO X search 'agent verification': found 20 tweets
+2026-03-09 08:45:23 [agent_town.scout.x_monitor] INFO Scout X search 'automate this workflow': found 20 tweets
+2026-03-09 08:45:23 [agent_town.scout.x_monitor] INFO Scout X search 'automate this workflow': found 20 tweets
+2026-03-09 08:45:24 [agent_town.bd.x_monitor] INFO X search 'agent-gated': found 20 tweets
+2026-03-09 08:45:24 [agent_town.bd.x_monitor] INFO X search 'agent-gated': found 20 tweets
+2026-03-09 08:45:25 [agent_town.scout.x_monitor] INFO Scout X search 'need an AI agent': found 20 tweets
+2026-03-09 08:45:25 [agent_town.scout.x_monitor] INFO Scout X search 'need an AI agent': found 20 tweets
+2026-03-09 08:45:25 [agent_town.bd.x_monitor] INFO X search 'agent identity': found 17 tweets
+2026-03-09 08:45:25 [agent_town.bd.x_monitor] INFO X search 'agent identity': found 17 tweets
+2026-03-09 08:45:26 [agent_town.scout.x_monitor] INFO Scout X search 'agent bounty': found 20 tweets
+2026-03-09 08:45:26 [agent_town.scout.x_monitor] INFO Scout X search 'agent bounty': found 20 tweets
+2026-03-09 08:45:26 [agent_town.scout.x_monitor] INFO Scout X scan: 197 unique tweets from 10 queries
+2026-03-09 08:45:26 [agent_town.scout.x_monitor] INFO Scout X scan: 197 unique tweets from 10 queries
+2026-03-09 08:45:27 [agent_town.anthropic] INFO Anthropic client initialized (model=claude-sonnet-4-20250514)
+2026-03-09 08:45:27 [agent_town.bd.x_monitor] INFO X search 'settler agent': found 17 tweets
+2026-03-09 08:45:27 [agent_town.bd.x_monitor] INFO X search 'settler agent': found 17 tweets
+2026-03-09 08:45:28 [agent_town.bd.x_monitor] INFO X search 'agent staking': found 20 tweets
+2026-03-09 08:45:28 [agent_town.bd.x_monitor] INFO X search 'agent staking': found 20 tweets
+2026-03-09 08:45:28 [agent_town.bd.x_monitor] INFO BD scan complete: 219 unique tweets across 12 queries
+2026-03-09 08:45:28 [agent_town.bd.x_monitor] INFO BD scan complete: 219 unique tweets across 12 queries
+2026-03-09 08:45:38 [agent_town.bd.crm] INFO Prospect upserted: @cryptologist99 on twitter
+2026-03-09 08:45:38 [agent_town.bd.crm] INFO Prospect upserted: @cryptologist99 on twitter
+2026-03-09 08:45:41 [agent_town.bd.outreach] INFO Drafted outreach for @cryptologist99 (431 chars)
+2026-03-09 08:45:41 [agent_town.bd.outreach] INFO Drafted outreach for @cryptologist99 (431 chars)
+2026-03-09 08:45:41 [agent_town.bd.crm] INFO Outreach queued for prospect 201c0d31-198a-4ff4-b7dc-05b43c4b5afe via twitter_dm
+2026-03-09 08:45:41 [agent_town.bd.crm] INFO Outreach queued for prospect 201c0d31-198a-4ff4-b7dc-05b43c4b5afe via twitter_dm
+2026-03-09 08:45:48 [agent_town.bd.crm] INFO Prospect upserted: @J0hn_bee on twitter
+2026-03-09 08:45:48 [agent_town.bd.crm] INFO Prospect upserted: @J0hn_bee on twitter
+2026-03-09 08:45:51 [agent_town.bd.outreach] INFO Drafted outreach for @J0hn_bee (387 chars)
+2026-03-09 08:45:51 [agent_town.bd.outreach] INFO Drafted outreach for @J0hn_bee (387 chars)
+2026-03-09 08:45:51 [agent_town.bd.crm] INFO Outreach queued for prospect 665c8730-dc89-4c9a-8b5a-2255e6317a83 via twitter_dm
+2026-03-09 08:45:51 [agent_town.bd.crm] INFO Outreach queued for prospect 665c8730-dc89-4c9a-8b5a-2255e6317a83 via twitter_dm
+2026-03-09 08:46:04 [agent_town.bd.crm] INFO Prospect upserted: @TyrianMurex on twitter
+2026-03-09 08:46:04 [agent_town.bd.crm] INFO Prospect upserted: @TyrianMurex on twitter
+2026-03-09 08:46:08 [agent_town.bd.outreach] INFO Drafted outreach for @TyrianMurex (421 chars)
+2026-03-09 08:46:08 [agent_town.bd.outreach] INFO Drafted outreach for @TyrianMurex (421 chars)
+2026-03-09 08:46:08 [agent_town.bd.crm] INFO Outreach queued for prospect 634c87f0-d64c-43a8-9af8-08db7f5d96a0 via twitter_dm
+2026-03-09 08:46:08 [agent_town.bd.crm] INFO Outreach queued for prospect 634c87f0-d64c-43a8-9af8-08db7f5d96a0 via twitter_dm
+2026-03-09 08:46:11 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 08:46:11 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 08:46:27 [agent_town.bd.crm] INFO Prospect upserted: @tmoney_145 on twitter
+2026-03-09 08:46:27 [agent_town.bd.crm] INFO Prospect upserted: @tmoney_145 on twitter
+2026-03-09 08:46:30 [agent_town.bd.outreach] INFO Drafted outreach for @tmoney_145 (349 chars)
+2026-03-09 08:46:30 [agent_town.bd.outreach] INFO Drafted outreach for @tmoney_145 (349 chars)
+2026-03-09 08:46:30 [agent_town.bd.crm] INFO Outreach queued for prospect ec87fd16-154d-465f-8eed-220e79740e4d via twitter_dm
+2026-03-09 08:46:30 [agent_town.bd.crm] INFO Outreach queued for prospect ec87fd16-154d-465f-8eed-220e79740e4d via twitter_dm
+2026-03-09 08:46:39 [agent_town.bd.crm] INFO Prospect upserted: @grok on twitter
+2026-03-09 08:46:39 [agent_town.bd.crm] INFO Prospect upserted: @grok on twitter
+2026-03-09 08:46:43 [agent_town.bd.outreach] INFO Drafted outreach for @grok (349 chars)
+2026-03-09 08:46:43 [agent_town.bd.outreach] INFO Drafted outreach for @grok (349 chars)
+2026-03-09 08:46:43 [agent_town.bd.crm] INFO Outreach queued for prospect 7d0be833-f2fa-4e03-95ff-7064988f0320 via twitter_dm
+2026-03-09 08:46:43 [agent_town.bd.crm] INFO Outreach queued for prospect 7d0be833-f2fa-4e03-95ff-7064988f0320 via twitter_dm
+2026-03-09 08:46:47 [agent_town.bd.crm] INFO Prospect upserted: @DaoKingdom on twitter
+2026-03-09 08:46:47 [agent_town.bd.crm] INFO Prospect upserted: @DaoKingdom on twitter
+2026-03-09 08:46:51 [agent_town.bd.outreach] INFO Drafted outreach for @DaoKingdom (361 chars)
+2026-03-09 08:46:51 [agent_town.bd.outreach] INFO Drafted outreach for @DaoKingdom (361 chars)
+2026-03-09 08:46:51 [agent_town.bd.crm] INFO Outreach queued for prospect 71053f58-fa2f-4097-b9dc-6fe8a8ac20ea via twitter_dm
+2026-03-09 08:46:51 [agent_town.bd.crm] INFO Outreach queued for prospect 71053f58-fa2f-4097-b9dc-6fe8a8ac20ea via twitter_dm
+2026-03-09 08:46:54 [agent_town.scout] INFO Posted opportunity from @Koka_AcademyLtd
+2026-03-09 08:47:11 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 08:47:12 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 08:47:14 [agent_town.bd.crm] INFO Prospect upserted: @BossMon_02 on twitter
+2026-03-09 08:47:14 [agent_town.bd.crm] INFO Prospect upserted: @BossMon_02 on twitter
+2026-03-09 08:47:18 [agent_town.bd.outreach] INFO Drafted outreach for @BossMon_02 (330 chars)
+2026-03-09 08:47:18 [agent_town.bd.outreach] INFO Drafted outreach for @BossMon_02 (330 chars)
+2026-03-09 08:47:18 [agent_town.bd.crm] INFO Outreach queued for prospect e4471d5a-4b07-4c4f-8102-17da4069b898 via twitter_dm
+2026-03-09 08:47:18 [agent_town.bd.crm] INFO Outreach queued for prospect e4471d5a-4b07-4c4f-8102-17da4069b898 via twitter_dm
+2026-03-09 08:47:23 [agent_town.bd.crm] INFO Prospect upserted: @TronDao_THA on twitter
+2026-03-09 08:47:23 [agent_town.bd.crm] INFO Prospect upserted: @TronDao_THA on twitter
+2026-03-09 08:47:26 [agent_town.bd.outreach] INFO Drafted outreach for @TronDao_THA (356 chars)
+2026-03-09 08:47:26 [agent_town.bd.outreach] INFO Drafted outreach for @TronDao_THA (356 chars)
+2026-03-09 08:47:26 [agent_town.bd.crm] INFO Outreach queued for prospect 4a3a5355-9e9d-4220-91ac-1ea093d041c7 via twitter_dm
+2026-03-09 08:47:26 [agent_town.bd.crm] INFO Outreach queued for prospect 4a3a5355-9e9d-4220-91ac-1ea093d041c7 via twitter_dm
+2026-03-09 08:47:27 [agent_town.scout] INFO Posted opportunity from @Bha74142Shivani
+2026-03-09 08:47:30 [agent_town.bd.crm] INFO Prospect upserted: @KCRubix on twitter
+2026-03-09 08:47:30 [agent_town.bd.crm] INFO Prospect upserted: @KCRubix on twitter
+2026-03-09 08:47:34 [agent_town.bd.outreach] INFO Drafted outreach for @KCRubix (380 chars)
+2026-03-09 08:47:34 [agent_town.bd.outreach] INFO Drafted outreach for @KCRubix (380 chars)
+2026-03-09 08:47:34 [agent_town.bd.crm] INFO Outreach queued for prospect 383ab946-f1a1-4b8b-a622-f7e80fbdc66e via twitter_dm
+2026-03-09 08:47:34 [agent_town.bd.crm] INFO Outreach queued for prospect 383ab946-f1a1-4b8b-a622-f7e80fbdc66e via twitter_dm
+2026-03-09 08:47:37 [agent_town.bd.crm] INFO Prospect upserted: @GlobalSoloOS on twitter
+2026-03-09 08:47:37 [agent_town.bd.crm] INFO Prospect upserted: @GlobalSoloOS on twitter
+2026-03-09 08:47:41 [agent_town.bd.outreach] INFO Drafted outreach for @GlobalSoloOS (380 chars)
+2026-03-09 08:47:41 [agent_town.bd.outreach] INFO Drafted outreach for @GlobalSoloOS (380 chars)
+2026-03-09 08:47:41 [agent_town.bd.crm] INFO Outreach queued for prospect 806b6b24-bab0-4cb9-b46d-090148b79260 via twitter_dm
+2026-03-09 08:47:41 [agent_town.bd.crm] INFO Outreach queued for prospect 806b6b24-bab0-4cb9-b46d-090148b79260 via twitter_dm
+2026-03-09 08:47:44 [agent_town.bd.crm] INFO Prospect upserted: @LastModelSta on twitter
+2026-03-09 08:47:44 [agent_town.bd.crm] INFO Prospect upserted: @LastModelSta on twitter
+2026-03-09 08:47:48 [agent_town.bd.outreach] INFO Drafted outreach for @LastModelSta (349 chars)
+2026-03-09 08:47:48 [agent_town.bd.outreach] INFO Drafted outreach for @LastModelSta (349 chars)
+2026-03-09 08:47:48 [agent_town.bd.crm] INFO Outreach queued for prospect 3656e54b-9cf1-4b51-be60-5dcb70b011ed via twitter_dm
+2026-03-09 08:47:48 [agent_town.bd.crm] INFO Outreach queued for prospect 3656e54b-9cf1-4b51-be60-5dcb70b011ed via twitter_dm
+2026-03-09 08:47:51 [agent_town.bd.crm] INFO Prospect upserted: @ICEY_eth_ on twitter
+2026-03-09 08:47:51 [agent_town.bd.crm] INFO Prospect upserted: @ICEY_eth_ on twitter
+2026-03-09 08:47:55 [agent_town.bd.outreach] INFO Drafted outreach for @ICEY_eth_ (403 chars)
+2026-03-09 08:47:55 [agent_town.bd.outreach] INFO Drafted outreach for @ICEY_eth_ (403 chars)
+2026-03-09 08:47:55 [agent_town.bd.crm] INFO Outreach queued for prospect fe8242a5-b392-4efe-9924-684f7d9dbc6d via twitter_dm
+2026-03-09 08:47:55 [agent_town.bd.crm] INFO Outreach queued for prospect fe8242a5-b392-4efe-9924-684f7d9dbc6d via twitter_dm
+2026-03-09 08:47:59 [agent_town.bd.crm] INFO Prospect upserted: @spanmuffin on twitter
+2026-03-09 08:47:59 [agent_town.bd.crm] INFO Prospect upserted: @spanmuffin on twitter
+2026-03-09 08:48:02 [agent_town.bd.outreach] INFO Drafted outreach for @spanmuffin (349 chars)
+2026-03-09 08:48:02 [agent_town.bd.outreach] INFO Drafted outreach for @spanmuffin (349 chars)
+2026-03-09 08:48:02 [agent_town.bd.crm] INFO Outreach queued for prospect 3e6af86f-cb8c-446b-8e0d-923b4d6706bb via twitter_dm
+2026-03-09 08:48:02 [agent_town.bd.crm] INFO Outreach queued for prospect 3e6af86f-cb8c-446b-8e0d-923b4d6706bb via twitter_dm
+2026-03-09 08:48:12 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 08:48:12 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 08:48:21 [agent_town.bd.crm] INFO Prospect upserted: @AslamS66782 on twitter
+2026-03-09 08:48:21 [agent_town.bd.crm] INFO Prospect upserted: @AslamS66782 on twitter
+2026-03-09 08:48:25 [agent_town.bd.outreach] INFO Drafted outreach for @AslamS66782 (396 chars)
+2026-03-09 08:48:25 [agent_town.bd.outreach] INFO Drafted outreach for @AslamS66782 (396 chars)
+2026-03-09 08:48:25 [agent_town.bd.crm] INFO Outreach queued for prospect 6428cd34-3da8-4370-8a30-1928166303dd via twitter_dm
+2026-03-09 08:48:25 [agent_town.bd.crm] INFO Outreach queued for prospect 6428cd34-3da8-4370-8a30-1928166303dd via twitter_dm
+2026-03-09 08:48:28 [agent_town.bd.crm] INFO Prospect upserted: @ZeroToAI_ on twitter
+2026-03-09 08:48:28 [agent_town.bd.crm] INFO Prospect upserted: @ZeroToAI_ on twitter
+2026-03-09 08:48:32 [agent_town.bd.outreach] INFO Drafted outreach for @ZeroToAI_ (435 chars)
+2026-03-09 08:48:32 [agent_town.bd.outreach] INFO Drafted outreach for @ZeroToAI_ (435 chars)
+2026-03-09 08:48:32 [agent_town.bd.crm] INFO Outreach queued for prospect 3eaafb9b-edec-4f99-a8fe-ca86ff1852a5 via twitter_dm
+2026-03-09 08:48:32 [agent_town.bd.crm] INFO Outreach queued for prospect 3eaafb9b-edec-4f99-a8fe-ca86ff1852a5 via twitter_dm
+2026-03-09 08:48:36 [agent_town.bd.crm] INFO Prospect upserted: @imjszhang on twitter
+2026-03-09 08:48:36 [agent_town.bd.crm] INFO Prospect upserted: @imjszhang on twitter
+2026-03-09 08:48:40 [agent_town.bd.outreach] INFO Drafted outreach for @imjszhang (430 chars)
+2026-03-09 08:48:40 [agent_town.bd.outreach] INFO Drafted outreach for @imjszhang (430 chars)
+2026-03-09 08:48:40 [agent_town.bd.crm] INFO Outreach queued for prospect d1b07ae2-379a-4afd-9abc-adf59bdbef33 via twitter_dm
+2026-03-09 08:48:40 [agent_town.bd.crm] INFO Outreach queued for prospect d1b07ae2-379a-4afd-9abc-adf59bdbef33 via twitter_dm
+2026-03-09 08:48:44 [agent_town.bd.crm] INFO Prospect upserted: @ElegantSnowWhit on twitter
+2026-03-09 08:48:44 [agent_town.bd.crm] INFO Prospect upserted: @ElegantSnowWhit on twitter
+2026-03-09 08:48:48 [agent_town.bd.outreach] INFO Drafted outreach for @ElegantSnowWhit (410 chars)
+2026-03-09 08:48:48 [agent_town.bd.outreach] INFO Drafted outreach for @ElegantSnowWhit (410 chars)
+2026-03-09 08:48:48 [agent_town.bd.crm] INFO Outreach queued for prospect be25588e-39b0-434e-8a19-f53899af8691 via twitter_dm
+2026-03-09 08:48:48 [agent_town.bd.crm] INFO Outreach queued for prospect be25588e-39b0-434e-8a19-f53899af8691 via twitter_dm
+2026-03-09 08:48:51 [agent_town.bd.crm] INFO Prospect upserted: @nithin_k_anil on twitter
+2026-03-09 08:48:51 [agent_town.bd.crm] INFO Prospect upserted: @nithin_k_anil on twitter
+2026-03-09 08:48:56 [agent_town.bd.outreach] INFO Drafted outreach for @nithin_k_anil (449 chars)
+2026-03-09 08:48:56 [agent_town.bd.outreach] INFO Drafted outreach for @nithin_k_anil (449 chars)
+2026-03-09 08:48:56 [agent_town.bd.crm] INFO Outreach queued for prospect b5a1d782-e887-471f-9c0b-7748e3eaeca9 via twitter_dm
+2026-03-09 08:48:56 [agent_town.bd.crm] INFO Outreach queued for prospect b5a1d782-e887-471f-9c0b-7748e3eaeca9 via twitter_dm
+2026-03-09 08:48:59 [agent_town.bd.crm] INFO Prospect upserted: @ProjSutra on twitter
+2026-03-09 08:48:59 [agent_town.bd.crm] INFO Prospect upserted: @ProjSutra on twitter
+2026-03-09 08:49:03 [agent_town.bd.outreach] INFO Drafted outreach for @ProjSutra (379 chars)
+2026-03-09 08:49:03 [agent_town.bd.outreach] INFO Drafted outreach for @ProjSutra (379 chars)
+2026-03-09 08:49:03 [agent_town.bd.crm] INFO Outreach queued for prospect f631e200-1f44-43eb-a45b-8d1b29ed06b1 via twitter_dm
+2026-03-09 08:49:03 [agent_town.bd.crm] INFO Outreach queued for prospect f631e200-1f44-43eb-a45b-8d1b29ed06b1 via twitter_dm
+2026-03-09 08:49:07 [agent_town.bd.crm] INFO Prospect upserted: @LuffaAmbassador on twitter
+2026-03-09 08:49:07 [agent_town.bd.crm] INFO Prospect upserted: @LuffaAmbassador on twitter
+2026-03-09 08:49:12 [agent_town.bd.outreach] INFO Drafted outreach for @LuffaAmbassador (470 chars)
+2026-03-09 08:49:12 [agent_town.bd.outreach] INFO Drafted outreach for @LuffaAmbassador (470 chars)
+2026-03-09 08:49:12 [agent_town.bd.crm] INFO Outreach queued for prospect c2945bb8-94d0-4c29-8b3c-9dd9869b7b33 via twitter_dm
+2026-03-09 08:49:12 [agent_town.bd.crm] INFO Outreach queued for prospect c2945bb8-94d0-4c29-8b3c-9dd9869b7b33 via twitter_dm
+2026-03-09 08:49:12 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 08:49:12 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 08:49:15 [agent_town.bd.crm] INFO Prospect upserted: @jasonxkensei on twitter
+2026-03-09 08:49:15 [agent_town.bd.crm] INFO Prospect upserted: @jasonxkensei on twitter
+2026-03-09 08:49:19 [agent_town.bd.outreach] INFO Drafted outreach for @jasonxkensei (370 chars)
+2026-03-09 08:49:19 [agent_town.bd.outreach] INFO Drafted outreach for @jasonxkensei (370 chars)
+2026-03-09 08:49:19 [agent_town.bd.crm] INFO Outreach queued for prospect 32f03123-59f3-450b-a7af-77f40d86f4de via twitter_dm
+2026-03-09 08:49:19 [agent_town.bd.crm] INFO Outreach queued for prospect 32f03123-59f3-450b-a7af-77f40d86f4de via twitter_dm
+2026-03-09 08:49:19 [agent_town.scout] INFO Posted opportunity from @ysu_ChatData
+2026-03-09 08:49:23 [agent_town.bd.crm] INFO Prospect upserted: @79yuuki_en on twitter
+2026-03-09 08:49:23 [agent_town.bd.crm] INFO Prospect upserted: @79yuuki_en on twitter
+2026-03-09 08:49:26 [agent_town.bd.outreach] INFO Drafted outreach for @79yuuki_en (326 chars)
+2026-03-09 08:49:26 [agent_town.bd.outreach] INFO Drafted outreach for @79yuuki_en (326 chars)
+2026-03-09 08:49:26 [agent_town.bd.crm] INFO Outreach queued for prospect cc1c6577-5860-45d9-8d17-859955bea7b4 via twitter_dm
+2026-03-09 08:49:26 [agent_town.bd.crm] INFO Outreach queued for prospect cc1c6577-5860-45d9-8d17-859955bea7b4 via twitter_dm
+2026-03-09 08:49:30 [agent_town.bd.crm] INFO Prospect upserted: @k9dreamer_btc on twitter
+2026-03-09 08:49:30 [agent_town.bd.crm] INFO Prospect upserted: @k9dreamer_btc on twitter
+2026-03-09 08:49:32 [agent_town.bd.outreach] INFO Drafted outreach for @k9dreamer_btc (293 chars)
+2026-03-09 08:49:32 [agent_town.bd.outreach] INFO Drafted outreach for @k9dreamer_btc (293 chars)
+2026-03-09 08:49:32 [agent_town.bd.crm] INFO Outreach queued for prospect e713ae0c-7fe4-48d6-84e0-c6ff7c352953 via twitter_dm
+2026-03-09 08:49:32 [agent_town.bd.crm] INFO Outreach queued for prospect e713ae0c-7fe4-48d6-84e0-c6ff7c352953 via twitter_dm
+2026-03-09 08:49:36 [agent_town.bd.crm] INFO Prospect upserted: @rv_RAJvishnu on twitter
+2026-03-09 08:49:36 [agent_town.bd.crm] INFO Prospect upserted: @rv_RAJvishnu on twitter
+2026-03-09 08:49:40 [agent_town.bd.outreach] INFO Drafted outreach for @rv_RAJvishnu (352 chars)
+2026-03-09 08:49:40 [agent_town.bd.outreach] INFO Drafted outreach for @rv_RAJvishnu (352 chars)
+2026-03-09 08:49:40 [agent_town.bd.crm] INFO Outreach queued for prospect 1900253b-0323-48a5-b439-48fa79958120 via twitter_dm
+2026-03-09 08:49:40 [agent_town.bd.crm] INFO Outreach queued for prospect 1900253b-0323-48a5-b439-48fa79958120 via twitter_dm
+2026-03-09 08:49:41 [agent_town.scout] INFO Posted opportunity from @0xSruj9
+2026-03-09 08:49:44 [agent_town.bd.crm] INFO Prospect upserted: @BASCAN_io on twitter
+2026-03-09 08:49:44 [agent_town.bd.crm] INFO Prospect upserted: @BASCAN_io on twitter
+2026-03-09 08:49:48 [agent_town.bd.outreach] INFO Drafted outreach for @BASCAN_io (445 chars)
+2026-03-09 08:49:48 [agent_town.bd.outreach] INFO Drafted outreach for @BASCAN_io (445 chars)
+2026-03-09 08:49:48 [agent_town.bd.crm] INFO Outreach queued for prospect e4fc7bba-4982-48e6-8ea3-d8de3294880e via twitter_dm
+2026-03-09 08:49:48 [agent_town.bd.crm] INFO Outreach queued for prospect e4fc7bba-4982-48e6-8ea3-d8de3294880e via twitter_dm
+2026-03-09 08:49:48 [agent_town.scout] INFO Posted opportunity from @0xSruj9
+2026-03-09 08:49:57 [agent_town.bd.crm] INFO Prospect upserted: @JaymeSelwy65901 on twitter
+2026-03-09 08:49:57 [agent_town.bd.crm] INFO Prospect upserted: @JaymeSelwy65901 on twitter
+2026-03-09 08:50:00 [agent_town.bd.outreach] INFO Drafted outreach for @JaymeSelwy65901 (339 chars)
+2026-03-09 08:50:00 [agent_town.bd.outreach] INFO Drafted outreach for @JaymeSelwy65901 (339 chars)
+2026-03-09 08:50:00 [agent_town.bd.crm] INFO Outreach queued for prospect 84dc0708-3750-437f-88c3-41163c27e0e1 via twitter_dm
+2026-03-09 08:50:00 [agent_town.bd.crm] INFO Outreach queued for prospect 84dc0708-3750-437f-88c3-41163c27e0e1 via twitter_dm
+2026-03-09 08:50:04 [agent_town.bd.crm] INFO Prospect upserted: @marsnock on twitter
+2026-03-09 08:50:04 [agent_town.bd.crm] INFO Prospect upserted: @marsnock on twitter
+2026-03-09 08:50:08 [agent_town.scout] INFO Posted opportunity from @aihackerjobs
+2026-03-09 08:50:08 [agent_town.bd.outreach] INFO Drafted outreach for @marsnock (366 chars)
+2026-03-09 08:50:08 [agent_town.bd.outreach] INFO Drafted outreach for @marsnock (366 chars)
+2026-03-09 08:50:08 [agent_town.bd.crm] INFO Outreach queued for prospect 49bfe6cf-4661-4d28-9570-7b4a8c740dea via twitter_dm
+2026-03-09 08:50:08 [agent_town.bd.crm] INFO Outreach queued for prospect 49bfe6cf-4661-4d28-9570-7b4a8c740dea via twitter_dm
+2026-03-09 08:50:11 [agent_town.bd.crm] INFO Prospect upserted: @lord_proto on twitter
+2026-03-09 08:50:11 [agent_town.bd.crm] INFO Prospect upserted: @lord_proto on twitter
+2026-03-09 08:50:12 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 08:50:13 [agent_town.worker.scorer] INFO Ranked 1 opportunities | top: 0.5925 (twitter, $25.0, low)
+2026-03-09 08:50:13 [agent_town.worker.scorer] INFO Ranked 1 opportunities | top: 0.5925 (twitter, $25.0, low)
+2026-03-09 08:50:13 [agent_town.worker] INFO Attempting task aa088a4f-8f92-442e-9ed6-72dfcf8c44fc: From @aihackerjobs: Quora is hiring a Senior Software Engineer (Remote) to build Poe’s Developer API
+2026-03-09 08:50:14 [agent_town.bd.outreach] INFO Drafted outreach for @lord_proto (288 chars)
+2026-03-09 08:50:14 [agent_town.bd.outreach] INFO Drafted outreach for @lord_proto (288 chars)
+2026-03-09 08:50:14 [agent_town.bd.crm] INFO Outreach queued for prospect dbc5633f-c0f1-47ae-9278-877c74f7613b via twitter_dm
+2026-03-09 08:50:14 [agent_town.bd.crm] INFO Outreach queued for prospect dbc5633f-c0f1-47ae-9278-877c74f7613b via twitter_dm
+2026-03-09 08:50:20 [agent_town.worker] INFO Using skill 'automate' for task aa088a4f-8f92-442e-9ed6-72dfcf8c44fc
+2026-03-09 08:50:20 [agent_town.bd.crm] INFO Prospect upserted: @clawdei_ai on twitter
+2026-03-09 08:50:20 [agent_town.bd.crm] INFO Prospect upserted: @clawdei_ai on twitter
+2026-03-09 08:50:23 [agent_town.bd.outreach] INFO Drafted outreach for @clawdei_ai (350 chars)
+2026-03-09 08:50:23 [agent_town.bd.outreach] INFO Drafted outreach for @clawdei_ai (350 chars)
+2026-03-09 08:50:23 [agent_town.bd.crm] INFO Outreach queued for prospect 279e91bd-822e-4064-86c9-e4637b86cfe0 via twitter_dm
+2026-03-09 08:50:23 [agent_town.bd.crm] INFO Outreach queued for prospect 279e91bd-822e-4064-86c9-e4637b86cfe0 via twitter_dm
+2026-03-09 08:50:26 [agent_town.bd.crm] INFO Prospect upserted: @8004Labs on twitter
+2026-03-09 08:50:26 [agent_town.bd.crm] INFO Prospect upserted: @8004Labs on twitter
+2026-03-09 08:50:30 [agent_town.bd.outreach] INFO Drafted outreach for @8004Labs (359 chars)
+2026-03-09 08:50:30 [agent_town.bd.outreach] INFO Drafted outreach for @8004Labs (359 chars)
+2026-03-09 08:50:30 [agent_town.bd.crm] INFO Outreach queued for prospect bcc6396f-e0db-477e-83ab-6ba893ad2f09 via twitter_dm
+2026-03-09 08:50:30 [agent_town.bd.crm] INFO Outreach queued for prospect bcc6396f-e0db-477e-83ab-6ba893ad2f09 via twitter_dm
+2026-03-09 08:50:34 [agent_town.bd.crm] INFO Prospect upserted: @fitboy_id on twitter
+2026-03-09 08:50:34 [agent_town.bd.crm] INFO Prospect upserted: @fitboy_id on twitter
+2026-03-09 08:50:37 [agent_town.bd.outreach] INFO Drafted outreach for @fitboy_id (349 chars)
+2026-03-09 08:50:37 [agent_town.bd.outreach] INFO Drafted outreach for @fitboy_id (349 chars)
+2026-03-09 08:50:37 [agent_town.bd.crm] INFO Outreach queued for prospect 84bb187b-0b08-42aa-8c6a-efe1d671d90e via twitter_dm
+2026-03-09 08:50:37 [agent_town.bd.crm] INFO Outreach queued for prospect 84bb187b-0b08-42aa-8c6a-efe1d671d90e via twitter_dm
+2026-03-09 08:50:42 [agent_town.bd.crm] INFO Prospect upserted: @basezh on twitter
+2026-03-09 08:50:42 [agent_town.bd.crm] INFO Prospect upserted: @basezh on twitter
+2026-03-09 08:50:42 [agent_town.scout] INFO Posted opportunity from @kidd1422
+2026-03-09 08:50:46 [agent_town.bd.outreach] INFO Drafted outreach for @basezh (438 chars)
+2026-03-09 08:50:46 [agent_town.bd.outreach] INFO Drafted outreach for @basezh (438 chars)
+2026-03-09 08:50:46 [agent_town.bd.crm] INFO Outreach queued for prospect f8aaf49d-7697-4fba-8cde-18c200bd477b via twitter_dm
+2026-03-09 08:50:46 [agent_town.bd.crm] INFO Outreach queued for prospect f8aaf49d-7697-4fba-8cde-18c200bd477b via twitter_dm
+2026-03-09 08:50:50 [agent_town.bd.crm] INFO Prospect upserted: @ETHPanda_Org on twitter
+2026-03-09 08:50:50 [agent_town.bd.crm] INFO Prospect upserted: @ETHPanda_Org on twitter
+2026-03-09 08:50:53 [agent_town.scout] INFO Posted opportunity from @DctTon
+2026-03-09 08:50:54 [agent_town.bd.outreach] INFO Drafted outreach for @ETHPanda_Org (343 chars)
+2026-03-09 08:50:54 [agent_town.bd.outreach] INFO Drafted outreach for @ETHPanda_Org (343 chars)
+2026-03-09 08:50:54 [agent_town.bd.crm] INFO Outreach queued for prospect 9bfb27c4-bf04-4c57-86ef-ed255f3e5693 via twitter_dm
+2026-03-09 08:50:54 [agent_town.bd.crm] INFO Outreach queued for prospect 9bfb27c4-bf04-4c57-86ef-ed255f3e5693 via twitter_dm
+2026-03-09 08:50:57 [agent_town.bd.crm] INFO Prospect upserted: @Quasymodo71 on twitter
+2026-03-09 08:50:57 [agent_town.bd.crm] INFO Prospect upserted: @Quasymodo71 on twitter
+2026-03-09 08:51:01 [agent_town.bd.outreach] INFO Drafted outreach for @Quasymodo71 (352 chars)
+2026-03-09 08:51:01 [agent_town.bd.outreach] INFO Drafted outreach for @Quasymodo71 (352 chars)
+2026-03-09 08:51:01 [agent_town.bd.crm] INFO Outreach queued for prospect a52940e1-c45c-4adf-9568-1e18275dcd78 via twitter_dm
+2026-03-09 08:51:01 [agent_town.bd.crm] INFO Outreach queued for prospect a52940e1-c45c-4adf-9568-1e18275dcd78 via twitter_dm
+2026-03-09 08:51:04 [agent_town.bd.crm] INFO Prospect upserted: @bread_ on twitter
+2026-03-09 08:51:04 [agent_town.bd.crm] INFO Prospect upserted: @bread_ on twitter
+2026-03-09 08:51:08 [agent_town.bd.outreach] INFO Drafted outreach for @bread_ (288 chars)
+2026-03-09 08:51:08 [agent_town.bd.outreach] INFO Drafted outreach for @bread_ (288 chars)
+2026-03-09 08:51:08 [agent_town.bd.crm] INFO Outreach queued for prospect f74ab683-2236-41b0-87e5-4480d0e76b72 via twitter_dm
+2026-03-09 08:51:08 [agent_town.bd.crm] INFO Outreach queued for prospect f74ab683-2236-41b0-87e5-4480d0e76b72 via twitter_dm
+2026-03-09 08:51:11 [agent_town.worker.scraper] WARNING Script failed (exit 1): Traceback (most recent call last):
+  File "C:\Users\theka\AppData\Local\Temp\tmp3bj3f5ah.py", line 1, in <module>
+    import tweepy
+ModuleNotFoundError: No module named 'tweepy'
+
+2026-03-09 08:51:11 [agent_town.worker.scraper] WARNING Script failed (exit 1): Traceback (most recent call last):
+  File "C:\Users\theka\AppData\Local\Temp\tmp3bj3f5ah.py", line 1, in <module>
+    import tweepy
+ModuleNotFoundError: No module named 'tweepy'
+
+2026-03-09 08:51:11 [agent_town.worker] ERROR Task aa088a4f-8f92-442e-9ed6-72dfcf8c44fc failed: Traceback (most recent call last):
+  File "C:\Users\theka\AppData\Local\Temp\tmp3bj3f5ah.py", line 1, in <module>
+    import tweepy
+ModuleNotFoundError: No module named 'tweepy'
+
+2026-03-09 08:51:11 [agent_town.worker] INFO Worker cycle: 1 attempted, 0 completed, 1 failed, $0.00 revenue
+2026-03-09 08:51:11 [agent_town.bd.crm] INFO Prospect upserted: @Fener1907RvP on twitter
+2026-03-09 08:51:11 [agent_town.bd.crm] INFO Prospect upserted: @Fener1907RvP on twitter
+2026-03-09 08:51:13 [agent_town.scout] INFO Posted opportunity from @Dev_Mustee
+2026-03-09 08:51:15 [agent_town.bd.outreach] INFO Drafted outreach for @Fener1907RvP (286 chars)
+2026-03-09 08:51:15 [agent_town.bd.outreach] INFO Drafted outreach for @Fener1907RvP (286 chars)
+2026-03-09 08:51:15 [agent_town.bd.crm] INFO Outreach queued for prospect 0785a932-2619-44c8-bda3-d4c0c2553f3b via twitter_dm
+2026-03-09 08:51:15 [agent_town.bd.crm] INFO Outreach queued for prospect 0785a932-2619-44c8-bda3-d4c0c2553f3b via twitter_dm
+2026-03-09 08:51:19 [agent_town.bd.crm] INFO Prospect upserted: @AIonBase_ on twitter
+2026-03-09 08:51:19 [agent_town.bd.crm] INFO Prospect upserted: @AIonBase_ on twitter
+2026-03-09 08:51:23 [agent_town.bd.outreach] INFO Drafted outreach for @AIonBase_ (383 chars)
+2026-03-09 08:51:23 [agent_town.bd.outreach] INFO Drafted outreach for @AIonBase_ (383 chars)
+2026-03-09 08:51:23 [agent_town.bd.crm] INFO Outreach queued for prospect 103d8394-1f26-45f6-91b8-ee4673a6dbff via twitter_dm
+2026-03-09 08:51:23 [agent_town.bd.crm] INFO Outreach queued for prospect 103d8394-1f26-45f6-91b8-ee4673a6dbff via twitter_dm
+2026-03-09 08:51:26 [agent_town.bd.crm] INFO Prospect upserted: @sibylcap on twitter
+2026-03-09 08:51:26 [agent_town.bd.crm] INFO Prospect upserted: @sibylcap on twitter
+2026-03-09 08:51:30 [agent_town.bd.outreach] INFO Drafted outreach for @sibylcap (413 chars)
+2026-03-09 08:51:30 [agent_town.bd.outreach] INFO Drafted outreach for @sibylcap (413 chars)
+2026-03-09 08:51:30 [agent_town.bd.crm] INFO Outreach queued for prospect 2897ae4a-9c5a-42f7-9104-b2cbc62bac14 via twitter_dm
+2026-03-09 08:51:30 [agent_town.bd.crm] INFO Outreach queued for prospect 2897ae4a-9c5a-42f7-9104-b2cbc62bac14 via twitter_dm
+2026-03-09 08:51:34 [agent_town.bd.crm] INFO Prospect upserted: @KingBul88693533 on twitter
+2026-03-09 08:51:34 [agent_town.bd.crm] INFO Prospect upserted: @KingBul88693533 on twitter
+2026-03-09 08:51:37 [agent_town.bd.outreach] INFO Drafted outreach for @KingBul88693533 (291 chars)
+2026-03-09 08:51:37 [agent_town.bd.outreach] INFO Drafted outreach for @KingBul88693533 (291 chars)
+2026-03-09 08:51:37 [agent_town.bd.crm] INFO Outreach queued for prospect 1a56ef7f-f2a4-4f77-b036-7ebf308597d1 via twitter_dm
+2026-03-09 08:51:37 [agent_town.bd.crm] INFO Outreach queued for prospect 1a56ef7f-f2a4-4f77-b036-7ebf308597d1 via twitter_dm
+2026-03-09 08:51:41 [agent_town.bd.crm] INFO Prospect upserted: @abdyweb3 on twitter
+2026-03-09 08:51:41 [agent_town.bd.crm] INFO Prospect upserted: @abdyweb3 on twitter
+2026-03-09 08:51:42 [agent_town.scout] INFO Posted opportunity from @NinjaTechAI
+2026-03-09 08:51:45 [agent_town.bd.outreach] INFO Drafted outreach for @abdyweb3 (339 chars)
+2026-03-09 08:51:45 [agent_town.bd.outreach] INFO Drafted outreach for @abdyweb3 (339 chars)
+2026-03-09 08:51:45 [agent_town.bd.crm] INFO Outreach queued for prospect 22a3487b-8ccf-4856-8ed2-01df563640a3 via twitter_dm
+2026-03-09 08:51:45 [agent_town.bd.crm] INFO Outreach queued for prospect 22a3487b-8ccf-4856-8ed2-01df563640a3 via twitter_dm
+2026-03-09 08:51:49 [agent_town.bd.crm] INFO Prospect upserted: @StackingSups on twitter
+2026-03-09 08:51:49 [agent_town.bd.crm] INFO Prospect upserted: @StackingSups on twitter
+2026-03-09 08:51:53 [agent_town.bd.outreach] INFO Drafted outreach for @StackingSups (357 chars)
+2026-03-09 08:51:53 [agent_town.bd.outreach] INFO Drafted outreach for @StackingSups (357 chars)
+2026-03-09 08:51:55 [agent_town.bd.crm] INFO Outreach queued for prospect 2635ec8e-d75c-4989-b8da-02622b9abbbd via twitter_dm
+2026-03-09 08:51:55 [agent_town.scout] INFO Posted opportunity from @Blastoisemolt
+2026-03-09 08:51:55 [agent_town.bd.crm] INFO Outreach queued for prospect 2635ec8e-d75c-4989-b8da-02622b9abbbd via twitter_dm
+2026-03-09 08:52:00 [agent_town.bd.crm] INFO Prospect upserted: @YaoJin86695 on twitter
+2026-03-09 08:52:00 [agent_town.bd.crm] INFO Prospect upserted: @YaoJin86695 on twitter
+2026-03-09 08:52:05 [agent_town.bd.outreach] INFO Drafted outreach for @YaoJin86695 (398 chars)
+2026-03-09 08:52:05 [agent_town.bd.outreach] INFO Drafted outreach for @YaoJin86695 (398 chars)
+2026-03-09 08:52:10 [agent_town.bd.crm] INFO Outreach queued for prospect 14ed9127-4484-4f93-9371-122ccf03333e via twitter_dm
+2026-03-09 08:52:10 [agent_town.bd.crm] INFO Outreach queued for prospect 14ed9127-4484-4f93-9371-122ccf03333e via twitter_dm
+2026-03-09 08:52:13 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 08:52:16 [agent_town.bd.crm] INFO Prospect upserted: @DDFP777 on twitter
+2026-03-09 08:52:16 [agent_town.bd.crm] INFO Prospect upserted: @DDFP777 on twitter
+2026-03-09 08:52:16 [agent_town.worker.scorer] INFO Ranked 1 opportunities | top: 0.5895 (twitter, $15.0, low)
+2026-03-09 08:52:16 [agent_town.worker.scorer] INFO Ranked 1 opportunities | top: 0.5895 (twitter, $15.0, low)
+2026-03-09 08:52:16 [agent_town.worker] INFO Attempting task 6ace1389-28b7-48d2-ae2e-9c465dc04338: From @Blastoisemolt: Power user tips from scraping the OpenClaw Discord:
+
+sessions_spawn is your bes
+2026-03-09 08:52:20 [agent_town.bd.outreach] INFO Drafted outreach for @DDFP777 (310 chars)
+2026-03-09 08:52:20 [agent_town.bd.outreach] INFO Drafted outreach for @DDFP777 (310 chars)
+2026-03-09 08:52:21 [agent_town.bd.crm] INFO Outreach queued for prospect 819c0463-784d-43a8-8b86-dd11d29d2fda via twitter_dm
+2026-03-09 08:52:21 [agent_town.bd.crm] INFO Outreach queued for prospect 819c0463-784d-43a8-8b86-dd11d29d2fda via twitter_dm
+2026-03-09 08:52:25 [agent_town.bd.crm] INFO Prospect upserted: @Moltron82 on twitter
+2026-03-09 08:52:25 [agent_town.bd.crm] INFO Prospect upserted: @Moltron82 on twitter
+2026-03-09 08:52:26 [agent_town.worker] INFO Using skill 'automate' for task 6ace1389-28b7-48d2-ae2e-9c465dc04338
+2026-03-09 08:52:30 [agent_town.bd.outreach] INFO Drafted outreach for @Moltron82 (351 chars)
+2026-03-09 08:52:30 [agent_town.bd.outreach] INFO Drafted outreach for @Moltron82 (351 chars)
+2026-03-09 08:52:31 [agent_town.bd.crm] INFO Outreach queued for prospect 17d50cd7-c15c-4892-bff7-bf712d6c2eff via twitter_dm
+2026-03-09 08:52:31 [agent_town.bd.crm] INFO Outreach queued for prospect 17d50cd7-c15c-4892-bff7-bf712d6c2eff via twitter_dm
+2026-03-09 08:52:36 [agent_town.bd.crm] INFO Prospect upserted: @HarmonyTrades_ on twitter
+2026-03-09 08:52:36 [agent_town.bd.crm] INFO Prospect upserted: @HarmonyTrades_ on twitter
+2026-03-09 08:52:39 [agent_town.scout] INFO Posted opportunity from @grok
+2026-03-09 08:52:40 [agent_town.bd.outreach] INFO Drafted outreach for @HarmonyTrades_ (465 chars)
+2026-03-09 08:52:40 [agent_town.bd.outreach] INFO Drafted outreach for @HarmonyTrades_ (465 chars)
+2026-03-09 08:52:40 [agent_town.bd.crm] INFO Outreach queued for prospect dfa57db6-a6b6-46af-83c9-0001af87f32f via twitter_dm
+2026-03-09 08:52:40 [agent_town.bd.crm] INFO Outreach queued for prospect dfa57db6-a6b6-46af-83c9-0001af87f32f via twitter_dm
+2026-03-09 08:52:44 [agent_town.bd.crm] INFO Prospect upserted: @pandutothemoon on twitter
+2026-03-09 08:52:44 [agent_town.bd.crm] INFO Prospect upserted: @pandutothemoon on twitter
+2026-03-09 08:52:48 [agent_town.bd.outreach] INFO Drafted outreach for @pandutothemoon (336 chars)
+2026-03-09 08:52:48 [agent_town.bd.outreach] INFO Drafted outreach for @pandutothemoon (336 chars)
+2026-03-09 08:52:48 [agent_town.bd.crm] INFO Outreach queued for prospect 4267a9f0-20b3-471b-8f58-154dc755901c via twitter_dm
+2026-03-09 08:52:48 [agent_town.bd.crm] INFO Outreach queued for prospect 4267a9f0-20b3-471b-8f58-154dc755901c via twitter_dm
+2026-03-09 08:52:51 [agent_town.bd.crm] INFO Prospect upserted: @Basanta5258 on twitter
+2026-03-09 08:52:51 [agent_town.bd.crm] INFO Prospect upserted: @Basanta5258 on twitter
+2026-03-09 08:52:55 [agent_town.bd.outreach] INFO Drafted outreach for @Basanta5258 (337 chars)
+2026-03-09 08:52:55 [agent_town.bd.outreach] INFO Drafted outreach for @Basanta5258 (337 chars)
+2026-03-09 08:52:55 [agent_town.bd.crm] INFO Outreach queued for prospect 6d890c1e-8399-4b7a-b2ef-bc64899ac253 via twitter_dm
+2026-03-09 08:52:55 [agent_town.bd.crm] INFO Outreach queued for prospect 6d890c1e-8399-4b7a-b2ef-bc64899ac253 via twitter_dm
+2026-03-09 08:52:56 [agent_town.treasury] INFO Income recorded: 15.0000 USD from worker via twitter
+2026-03-09 08:52:56 [agent_town.worker] INFO Task 6ace1389-28b7-48d2-ae2e-9c465dc04338 completed successfully
+2026-03-09 08:52:56 [agent_town.worker] INFO Worker cycle: 1 attempted, 1 completed, 0 failed, $15.00 revenue
+2026-03-09 08:53:01 [agent_town.bd.crm] INFO Prospect upserted: @CCrypto666 on twitter
+2026-03-09 08:53:01 [agent_town.bd.crm] INFO Prospect upserted: @CCrypto666 on twitter
+2026-03-09 08:53:05 [agent_town.bd.outreach] INFO Drafted outreach for @CCrypto666 (379 chars)
+2026-03-09 08:53:05 [agent_town.bd.outreach] INFO Drafted outreach for @CCrypto666 (379 chars)
+2026-03-09 08:53:05 [agent_town.bd.crm] INFO Outreach queued for prospect 6dfca38d-aff5-4ee5-90df-16133b303f2b via twitter_dm
+2026-03-09 08:53:05 [agent_town.bd.crm] INFO Outreach queued for prospect 6dfca38d-aff5-4ee5-90df-16133b303f2b via twitter_dm
+2026-03-09 08:53:09 [agent_town.bd.crm] INFO Prospect upserted: @OtusEng on twitter
+2026-03-09 08:53:09 [agent_town.bd.crm] INFO Prospect upserted: @OtusEng on twitter
+2026-03-09 08:53:12 [agent_town.bd.outreach] INFO Drafted outreach for @OtusEng (360 chars)
+2026-03-09 08:53:12 [agent_town.bd.outreach] INFO Drafted outreach for @OtusEng (360 chars)
+2026-03-09 08:53:13 [agent_town.bd.crm] INFO Outreach queued for prospect 3cd26051-8922-478b-8dd5-d2b7c52af4ac via twitter_dm
+2026-03-09 08:53:13 [agent_town.bd.crm] INFO Outreach queued for prospect 3cd26051-8922-478b-8dd5-d2b7c52af4ac via twitter_dm
+2026-03-09 08:53:16 [agent_town.bd.crm] INFO Prospect upserted: @ivorytowrcrypto on twitter
+2026-03-09 08:53:16 [agent_town.bd.crm] INFO Prospect upserted: @ivorytowrcrypto on twitter
+2026-03-09 08:53:20 [agent_town.bd.outreach] INFO Drafted outreach for @ivorytowrcrypto (478 chars)
+2026-03-09 08:53:20 [agent_town.bd.outreach] INFO Drafted outreach for @ivorytowrcrypto (478 chars)
+2026-03-09 08:53:20 [agent_town.bd.crm] INFO Outreach queued for prospect 73e5600a-61b2-4e6d-9277-2d76a8ef72f5 via twitter_dm
+2026-03-09 08:53:20 [agent_town.bd.crm] INFO Outreach queued for prospect 73e5600a-61b2-4e6d-9277-2d76a8ef72f5 via twitter_dm
+2026-03-09 08:53:20 [agent_town.scout] INFO Posted opportunity from @delxbot
+2026-03-09 08:53:25 [agent_town.bd.crm] INFO Prospect upserted: @aixbt_agent on twitter
+2026-03-09 08:53:25 [agent_town.bd.crm] INFO Prospect upserted: @aixbt_agent on twitter
+2026-03-09 08:53:28 [agent_town.bd.outreach] INFO Drafted outreach for @aixbt_agent (316 chars)
+2026-03-09 08:53:28 [agent_town.bd.outreach] INFO Drafted outreach for @aixbt_agent (316 chars)
+2026-03-09 08:53:28 [agent_town.bd.crm] INFO Outreach queued for prospect 5efe3436-f5e4-4e79-8aca-304f6072068b via twitter_dm
+2026-03-09 08:53:28 [agent_town.bd.crm] INFO Outreach queued for prospect 5efe3436-f5e4-4e79-8aca-304f6072068b via twitter_dm
+2026-03-09 08:53:31 [agent_town.scout] INFO Posted opportunity from @HuggingModels
+2026-03-09 08:53:32 [agent_town.bd.crm] INFO Prospect upserted: @KGohst_9 on twitter
+2026-03-09 08:53:32 [agent_town.bd.crm] INFO Prospect upserted: @KGohst_9 on twitter
+2026-03-09 08:53:35 [agent_town.bd.outreach] INFO Drafted outreach for @KGohst_9 (360 chars)
+2026-03-09 08:53:35 [agent_town.bd.outreach] INFO Drafted outreach for @KGohst_9 (360 chars)
+2026-03-09 08:53:35 [agent_town.bd.crm] INFO Outreach queued for prospect 75cf0752-b8a8-4b6d-b8cf-4caab4fd9054 via twitter_dm
+2026-03-09 08:53:35 [agent_town.bd.crm] INFO Outreach queued for prospect 75cf0752-b8a8-4b6d-b8cf-4caab4fd9054 via twitter_dm
+2026-03-09 08:53:39 [agent_town.bd.crm] INFO Prospect upserted: @TheAIAssembly on twitter
+2026-03-09 08:53:39 [agent_town.bd.crm] INFO Prospect upserted: @TheAIAssembly on twitter
+2026-03-09 08:53:43 [agent_town.bd.outreach] INFO Drafted outreach for @TheAIAssembly (401 chars)
+2026-03-09 08:53:43 [agent_town.bd.outreach] INFO Drafted outreach for @TheAIAssembly (401 chars)
+2026-03-09 08:53:43 [agent_town.bd.crm] INFO Outreach queued for prospect 08b5de40-fa1d-41a6-beea-21f4fc261d53 via twitter_dm
+2026-03-09 08:53:43 [agent_town.bd.crm] INFO Outreach queued for prospect 08b5de40-fa1d-41a6-beea-21f4fc261d53 via twitter_dm
+2026-03-09 08:53:46 [agent_town.bd.crm] INFO Prospect upserted: @llorti on twitter
+2026-03-09 08:53:46 [agent_town.bd.crm] INFO Prospect upserted: @llorti on twitter
+2026-03-09 08:53:50 [agent_town.bd.outreach] INFO Drafted outreach for @llorti (332 chars)
+2026-03-09 08:53:50 [agent_town.bd.outreach] INFO Drafted outreach for @llorti (332 chars)
+2026-03-09 08:53:50 [agent_town.bd.crm] INFO Outreach queued for prospect 70649583-c7a3-4665-9a75-bda4c1214e1e via twitter_dm
+2026-03-09 08:53:50 [agent_town.bd.crm] INFO Outreach queued for prospect 70649583-c7a3-4665-9a75-bda4c1214e1e via twitter_dm
+2026-03-09 08:53:53 [agent_town.bd.crm] INFO Prospect upserted: @mattdreams on twitter
+2026-03-09 08:53:53 [agent_town.bd.crm] INFO Prospect upserted: @mattdreams on twitter
+2026-03-09 08:53:56 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 08:53:56 [agent_town.worker.scorer] INFO Ranked 1 opportunities | top: 0.5925 (twitter, $25.0, low)
+2026-03-09 08:53:56 [agent_town.worker.scorer] INFO Ranked 1 opportunities | top: 0.5925 (twitter, $25.0, low)
+2026-03-09 08:53:56 [agent_town.worker] INFO Attempting task 6a47c703-4784-4426-bf05-4b8f3ccec209: From @HuggingModels: What can you actually build with Reve-Base? Think brain-computer interfaces for
+2026-03-09 08:53:57 [agent_town.bd.outreach] INFO Drafted outreach for @mattdreams (351 chars)
+2026-03-09 08:53:57 [agent_town.bd.outreach] INFO Drafted outreach for @mattdreams (351 chars)
+2026-03-09 08:53:57 [agent_town.bd.crm] INFO Outreach queued for prospect 181835a0-446d-4519-b38a-bcb8daf23a24 via twitter_dm
+2026-03-09 08:53:57 [agent_town.bd.crm] INFO Outreach queued for prospect 181835a0-446d-4519-b38a-bcb8daf23a24 via twitter_dm
+2026-03-09 08:53:58 [agent_town.scout] INFO Posted opportunity from @algonovalabs
+2026-03-09 08:54:00 [agent_town.bd.crm] INFO Prospect upserted: @clawopedia on twitter
+2026-03-09 08:54:00 [agent_town.bd.crm] INFO Prospect upserted: @clawopedia on twitter
+2026-03-09 08:54:00 [agent_town.worker] INFO Using skill 'automate' for task 6a47c703-4784-4426-bf05-4b8f3ccec209
+2026-03-09 08:54:03 [agent_town.bd.outreach] INFO Drafted outreach for @clawopedia (292 chars)
+2026-03-09 08:54:03 [agent_town.bd.outreach] INFO Drafted outreach for @clawopedia (292 chars)
+2026-03-09 08:54:03 [agent_town.bd.crm] INFO Outreach queued for prospect 88a17adc-4490-4a73-8adb-6f9d7a094f5c via twitter_dm
+2026-03-09 08:54:03 [agent_town.bd.crm] INFO Outreach queued for prospect 88a17adc-4490-4a73-8adb-6f9d7a094f5c via twitter_dm
+2026-03-09 08:54:06 [agent_town.bd.crm] INFO Prospect upserted: @deside_app on twitter
+2026-03-09 08:54:06 [agent_town.bd.crm] INFO Prospect upserted: @deside_app on twitter
+2026-03-09 08:54:09 [agent_town.bd.outreach] INFO Drafted outreach for @deside_app (333 chars)
+2026-03-09 08:54:09 [agent_town.bd.outreach] INFO Drafted outreach for @deside_app (333 chars)
+2026-03-09 08:54:09 [agent_town.bd.crm] INFO Outreach queued for prospect 99d57c26-ec38-4cb1-86e0-fc151840349c via twitter_dm
+2026-03-09 08:54:09 [agent_town.bd.crm] INFO Outreach queued for prospect 99d57c26-ec38-4cb1-86e0-fc151840349c via twitter_dm
+2026-03-09 08:54:15 [agent_town.bd.crm] INFO Prospect upserted: @TrySAIDProtocol on twitter
+2026-03-09 08:54:15 [agent_town.bd.crm] INFO Prospect upserted: @TrySAIDProtocol on twitter
+2026-03-09 08:54:18 [agent_town.bd.outreach] INFO Drafted outreach for @TrySAIDProtocol (306 chars)
+2026-03-09 08:54:18 [agent_town.bd.outreach] INFO Drafted outreach for @TrySAIDProtocol (306 chars)
+2026-03-09 08:54:18 [agent_town.bd.crm] INFO Outreach queued for prospect 30396a97-fd28-46c6-97ad-5eff1999f079 via twitter_dm
+2026-03-09 08:54:18 [agent_town.bd.crm] INFO Outreach queued for prospect 30396a97-fd28-46c6-97ad-5eff1999f079 via twitter_dm
+2026-03-09 08:54:21 [agent_town.bd.crm] INFO Prospect upserted: @Griffin_AI on twitter
+2026-03-09 08:54:21 [agent_town.bd.crm] INFO Prospect upserted: @Griffin_AI on twitter
+2026-03-09 08:54:25 [agent_town.bd.outreach] INFO Drafted outreach for @Griffin_AI (288 chars)
+2026-03-09 08:54:25 [agent_town.bd.outreach] INFO Drafted outreach for @Griffin_AI (288 chars)
+2026-03-09 08:54:25 [agent_town.bd.crm] INFO Outreach queued for prospect c7fcb69b-d7f0-4762-99c8-e5afded39ffd via twitter_dm
+2026-03-09 08:54:25 [agent_town.bd.crm] INFO Outreach queued for prospect c7fcb69b-d7f0-4762-99c8-e5afded39ffd via twitter_dm
+2026-03-09 08:54:27 [agent_town.bd.crm] INFO Prospect upserted: @LEMINO_nft on twitter
+2026-03-09 08:54:27 [agent_town.bd.crm] INFO Prospect upserted: @LEMINO_nft on twitter
+2026-03-09 08:54:28 [agent_town.treasury] INFO Income recorded: 25.0000 USD from worker via twitter
+2026-03-09 08:54:28 [agent_town.worker] INFO Task 6a47c703-4784-4426-bf05-4b8f3ccec209 completed successfully
+2026-03-09 08:54:28 [agent_town.worker] INFO Worker cycle: 1 attempted, 1 completed, 0 failed, $25.00 revenue
+2026-03-09 08:54:30 [agent_town.bd.outreach] INFO Drafted outreach for @LEMINO_nft (347 chars)
+2026-03-09 08:54:30 [agent_town.bd.outreach] INFO Drafted outreach for @LEMINO_nft (347 chars)
+2026-03-09 08:54:30 [agent_town.bd.crm] INFO Outreach queued for prospect 1f291231-f5dc-4eb5-9b9b-29cd1d1932b9 via twitter_dm
+2026-03-09 08:54:30 [agent_town.bd.crm] INFO Outreach queued for prospect 1f291231-f5dc-4eb5-9b9b-29cd1d1932b9 via twitter_dm
+2026-03-09 08:54:33 [agent_town.bd.crm] INFO Prospect upserted: @0xlchk on twitter
+2026-03-09 08:54:33 [agent_town.bd.crm] INFO Prospect upserted: @0xlchk on twitter
+2026-03-09 08:54:37 [agent_town.bd.outreach] INFO Drafted outreach for @0xlchk (364 chars)
+2026-03-09 08:54:37 [agent_town.bd.outreach] INFO Drafted outreach for @0xlchk (364 chars)
+2026-03-09 08:54:37 [agent_town.bd.crm] INFO Outreach queued for prospect 6e05564d-a122-4ded-8855-481aa67805fd via twitter_dm
+2026-03-09 08:54:37 [agent_town.bd.crm] INFO Outreach queued for prospect 6e05564d-a122-4ded-8855-481aa67805fd via twitter_dm
+2026-03-09 08:54:41 [agent_town.bd.crm] INFO Prospect upserted: @BasedMedical on twitter
+2026-03-09 08:54:41 [agent_town.bd.crm] INFO Prospect upserted: @BasedMedical on twitter
+2026-03-09 08:54:45 [agent_town.bd.outreach] INFO Drafted outreach for @BasedMedical (451 chars)
+2026-03-09 08:54:45 [agent_town.bd.outreach] INFO Drafted outreach for @BasedMedical (451 chars)
+2026-03-09 08:54:45 [agent_town.bd.crm] INFO Outreach queued for prospect 0e015b69-0c0a-4d23-87a4-e0077f43a1e8 via twitter_dm
+2026-03-09 08:54:45 [agent_town.bd.crm] INFO Outreach queued for prospect 0e015b69-0c0a-4d23-87a4-e0077f43a1e8 via twitter_dm
+2026-03-09 08:54:48 [agent_town.scout] INFO Posted opportunity from @algonovalabs
+2026-03-09 08:54:48 [agent_town.bd.crm] INFO Prospect upserted: @misseggayam on twitter
+2026-03-09 08:54:48 [agent_town.bd.crm] INFO Prospect upserted: @misseggayam on twitter
+2026-03-09 08:54:52 [agent_town.bd.outreach] INFO Drafted outreach for @misseggayam (543 chars)
+2026-03-09 08:54:52 [agent_town.bd.outreach] INFO Drafted outreach for @misseggayam (543 chars)
+2026-03-09 08:54:53 [agent_town.bd.crm] INFO Outreach queued for prospect b4ad2162-a104-485a-8d5a-75dae03c5961 via twitter_dm
+2026-03-09 08:54:53 [agent_town.bd.crm] INFO Outreach queued for prospect b4ad2162-a104-485a-8d5a-75dae03c5961 via twitter_dm
+2026-03-09 08:54:56 [agent_town.bd.crm] INFO Prospect upserted: @jordymaui on twitter
+2026-03-09 08:54:56 [agent_town.bd.crm] INFO Prospect upserted: @jordymaui on twitter
+2026-03-09 08:54:59 [agent_town.bd.outreach] INFO Drafted outreach for @jordymaui (399 chars)
+2026-03-09 08:54:59 [agent_town.bd.outreach] INFO Drafted outreach for @jordymaui (399 chars)
+2026-03-09 08:55:00 [agent_town.bd.crm] INFO Outreach queued for prospect 7df12dc7-35b9-484f-8f5e-416bd594881a via twitter_dm
+2026-03-09 08:55:00 [agent_town.bd.crm] INFO Outreach queued for prospect 7df12dc7-35b9-484f-8f5e-416bd594881a via twitter_dm
+2026-03-09 08:55:03 [agent_town.bd.crm] INFO Prospect upserted: @ormanyip on twitter
+2026-03-09 08:55:03 [agent_town.bd.crm] INFO Prospect upserted: @ormanyip on twitter
+2026-03-09 08:55:06 [agent_town.bd.outreach] INFO Drafted outreach for @ormanyip (366 chars)
+2026-03-09 08:55:06 [agent_town.bd.outreach] INFO Drafted outreach for @ormanyip (366 chars)
+2026-03-09 08:55:06 [agent_town.bd.crm] INFO Outreach queued for prospect 4a500df8-69c0-4723-bac5-e3a3f2734ec1 via twitter_dm
+2026-03-09 08:55:06 [agent_town.bd.crm] INFO Outreach queued for prospect 4a500df8-69c0-4723-bac5-e3a3f2734ec1 via twitter_dm
+2026-03-09 08:55:09 [agent_town.bd.crm] INFO Prospect upserted: @Mina_Intel on twitter
+2026-03-09 08:55:09 [agent_town.bd.crm] INFO Prospect upserted: @Mina_Intel on twitter
+2026-03-09 08:55:13 [agent_town.bd.outreach] INFO Drafted outreach for @Mina_Intel (367 chars)
+2026-03-09 08:55:13 [agent_town.bd.outreach] INFO Drafted outreach for @Mina_Intel (367 chars)
+2026-03-09 08:55:14 [agent_town.bd.crm] INFO Outreach queued for prospect af3222fc-ff5f-4767-a9bc-31506da40552 via twitter_dm
+2026-03-09 08:55:14 [agent_town.bd.crm] INFO Outreach queued for prospect af3222fc-ff5f-4767-a9bc-31506da40552 via twitter_dm
+2026-03-09 08:55:17 [agent_town.bd.crm] INFO Prospect upserted: @charles__AI on twitter
+2026-03-09 08:55:17 [agent_town.bd.crm] INFO Prospect upserted: @charles__AI on twitter
+2026-03-09 08:55:22 [agent_town.bd.outreach] INFO Drafted outreach for @charles__AI (434 chars)
+2026-03-09 08:55:22 [agent_town.bd.outreach] INFO Drafted outreach for @charles__AI (434 chars)
+2026-03-09 08:55:22 [agent_town.bd.crm] INFO Outreach queued for prospect f49313d2-45f7-4923-859b-821499d447af via twitter_dm
+2026-03-09 08:55:22 [agent_town.bd.crm] INFO Outreach queued for prospect f49313d2-45f7-4923-859b-821499d447af via twitter_dm
+2026-03-09 08:55:25 [agent_town.bd.crm] INFO Prospect upserted: @czar_skah on twitter
+2026-03-09 08:55:25 [agent_town.bd.crm] INFO Prospect upserted: @czar_skah on twitter
+2026-03-09 08:55:28 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 08:55:28 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 08:55:28 [agent_town.bd.outreach] INFO Drafted outreach for @czar_skah (341 chars)
+2026-03-09 08:55:28 [agent_town.bd.outreach] INFO Drafted outreach for @czar_skah (341 chars)
+2026-03-09 08:55:28 [agent_town.bd.crm] INFO Outreach queued for prospect 7aa1706d-29aa-4185-9824-8c8f7807dfae via twitter_dm
+2026-03-09 08:55:28 [agent_town.bd.crm] INFO Outreach queued for prospect 7aa1706d-29aa-4185-9824-8c8f7807dfae via twitter_dm
+2026-03-09 08:55:31 [agent_town.bd.crm] INFO Prospect upserted: @Dan_1_Alpha on twitter
+2026-03-09 08:55:31 [agent_town.bd.crm] INFO Prospect upserted: @Dan_1_Alpha on twitter
+2026-03-09 08:55:34 [agent_town.bd.outreach] INFO Drafted outreach for @Dan_1_Alpha (326 chars)
+2026-03-09 08:55:34 [agent_town.bd.outreach] INFO Drafted outreach for @Dan_1_Alpha (326 chars)
+2026-03-09 08:55:35 [agent_town.bd.crm] INFO Outreach queued for prospect e7dbb166-4981-4d2e-ba36-260227f104fd via twitter_dm
+2026-03-09 08:55:35 [agent_town.bd.crm] INFO Outreach queued for prospect e7dbb166-4981-4d2e-ba36-260227f104fd via twitter_dm
+2026-03-09 08:55:38 [agent_town.bd.crm] INFO Prospect upserted: @thelrdlstworld on twitter
+2026-03-09 08:55:38 [agent_town.bd.crm] INFO Prospect upserted: @thelrdlstworld on twitter
+2026-03-09 08:55:42 [agent_town.bd.outreach] INFO Drafted outreach for @thelrdlstworld (427 chars)
+2026-03-09 08:55:42 [agent_town.bd.outreach] INFO Drafted outreach for @thelrdlstworld (427 chars)
+2026-03-09 08:55:42 [agent_town.bd.crm] INFO Outreach queued for prospect 2937cf10-92a7-4be2-9f4d-0da1ed63b03a via twitter_dm
+2026-03-09 08:55:42 [agent_town.bd.crm] INFO Outreach queued for prospect 2937cf10-92a7-4be2-9f4d-0da1ed63b03a via twitter_dm
+2026-03-09 08:55:46 [agent_town.bd.crm] INFO Prospect upserted: @CharlesNG0622 on twitter
+2026-03-09 08:55:46 [agent_town.bd.crm] INFO Prospect upserted: @CharlesNG0622 on twitter
+2026-03-09 08:55:49 [agent_town.bd.outreach] INFO Drafted outreach for @CharlesNG0622 (381 chars)
+2026-03-09 08:55:49 [agent_town.bd.outreach] INFO Drafted outreach for @CharlesNG0622 (381 chars)
+2026-03-09 08:55:49 [agent_town.bd.crm] INFO Outreach queued for prospect 2a480cc8-d628-4afc-837d-971454ff1b44 via twitter_dm
+2026-03-09 08:55:49 [agent_town.bd.crm] INFO Outreach queued for prospect 2a480cc8-d628-4afc-837d-971454ff1b44 via twitter_dm
+2026-03-09 08:55:53 [agent_town.bd.crm] INFO Prospect upserted: @famdotwork on twitter
+2026-03-09 08:55:53 [agent_town.bd.crm] INFO Prospect upserted: @famdotwork on twitter
+2026-03-09 08:55:56 [agent_town.bd.outreach] INFO Drafted outreach for @famdotwork (362 chars)
+2026-03-09 08:55:56 [agent_town.bd.outreach] INFO Drafted outreach for @famdotwork (362 chars)
+2026-03-09 08:55:56 [agent_town.bd.crm] INFO Outreach queued for prospect 9acab88a-9087-49f4-b16c-92fdeafe227e via twitter_dm
+2026-03-09 08:55:56 [agent_town.bd.crm] INFO Outreach queued for prospect 9acab88a-9087-49f4-b16c-92fdeafe227e via twitter_dm
+2026-03-09 08:56:02 [agent_town.bd.crm] INFO Prospect upserted: @gimmygibby on twitter
+2026-03-09 08:56:02 [agent_town.bd.crm] INFO Prospect upserted: @gimmygibby on twitter
+2026-03-09 08:56:05 [agent_town.bd.outreach] INFO Drafted outreach for @gimmygibby (514 chars)
+2026-03-09 08:56:05 [agent_town.bd.outreach] INFO Drafted outreach for @gimmygibby (514 chars)
+2026-03-09 08:56:05 [agent_town.bd.crm] INFO Outreach queued for prospect e3858f23-a9d6-4a4a-97e1-96e99e44674a via twitter_dm
+2026-03-09 08:56:05 [agent_town.bd.crm] INFO Outreach queued for prospect e3858f23-a9d6-4a4a-97e1-96e99e44674a via twitter_dm
+2026-03-09 08:56:09 [agent_town.bd.crm] INFO Prospect upserted: @AgentEconoemy on twitter
+2026-03-09 08:56:09 [agent_town.bd.crm] INFO Prospect upserted: @AgentEconoemy on twitter
+2026-03-09 08:56:12 [agent_town.bd.outreach] INFO Drafted outreach for @AgentEconoemy (377 chars)
+2026-03-09 08:56:12 [agent_town.bd.outreach] INFO Drafted outreach for @AgentEconoemy (377 chars)
+2026-03-09 08:56:12 [agent_town.bd.crm] INFO Outreach queued for prospect 5477addd-4d59-4d7a-8fbc-97f959f3d091 via twitter_dm
+2026-03-09 08:56:12 [agent_town.bd.crm] INFO Outreach queued for prospect 5477addd-4d59-4d7a-8fbc-97f959f3d091 via twitter_dm
+2026-03-09 08:56:17 [agent_town.bd.crm] INFO Prospect upserted: @Whistle_Ninja on twitter
+2026-03-09 08:56:17 [agent_town.bd.crm] INFO Prospect upserted: @Whistle_Ninja on twitter
+2026-03-09 08:56:20 [agent_town.bd.outreach] INFO Drafted outreach for @Whistle_Ninja (370 chars)
+2026-03-09 08:56:20 [agent_town.bd.outreach] INFO Drafted outreach for @Whistle_Ninja (370 chars)
+2026-03-09 08:56:21 [agent_town.bd.crm] INFO Outreach queued for prospect 16e2de48-74d9-4a4d-9737-bc39d8e68b6d via twitter_dm
+2026-03-09 08:56:21 [agent_town.bd.crm] INFO Outreach queued for prospect 16e2de48-74d9-4a4d-9737-bc39d8e68b6d via twitter_dm
+2026-03-09 08:56:23 [agent_town.bd.crm] INFO Prospect upserted: @alhasaniq on twitter
+2026-03-09 08:56:23 [agent_town.bd.crm] INFO Prospect upserted: @alhasaniq on twitter
+2026-03-09 08:56:26 [agent_town.bd.outreach] INFO Drafted outreach for @alhasaniq (302 chars)
+2026-03-09 08:56:26 [agent_town.bd.outreach] INFO Drafted outreach for @alhasaniq (302 chars)
+2026-03-09 08:56:26 [agent_town.bd.crm] INFO Outreach queued for prospect 9b2e9942-a12f-41d8-9cfd-7ed2a87dfcda via twitter_dm
+2026-03-09 08:56:26 [agent_town.bd.crm] INFO Outreach queued for prospect 9b2e9942-a12f-41d8-9cfd-7ed2a87dfcda via twitter_dm
+2026-03-09 08:56:28 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 08:56:28 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 08:56:30 [agent_town.bd.crm] INFO Prospect upserted: @nullPriest_ on twitter
+2026-03-09 08:56:30 [agent_town.bd.crm] INFO Prospect upserted: @nullPriest_ on twitter
+2026-03-09 08:56:34 [agent_town.bd.outreach] INFO Drafted outreach for @nullPriest_ (347 chars)
+2026-03-09 08:56:34 [agent_town.bd.outreach] INFO Drafted outreach for @nullPriest_ (347 chars)
+2026-03-09 08:56:34 [agent_town.bd.crm] INFO Outreach queued for prospect 8bc9266a-525f-40b4-9ee1-02b016279449 via twitter_dm
+2026-03-09 08:56:34 [agent_town.bd.crm] INFO Outreach queued for prospect 8bc9266a-525f-40b4-9ee1-02b016279449 via twitter_dm
+2026-03-09 08:56:37 [agent_town.bd.crm] INFO Prospect upserted: @reson8Labs on twitter
+2026-03-09 08:56:37 [agent_town.bd.crm] INFO Prospect upserted: @reson8Labs on twitter
+2026-03-09 08:56:42 [agent_town.bd.outreach] INFO Drafted outreach for @reson8Labs (441 chars)
+2026-03-09 08:56:42 [agent_town.bd.outreach] INFO Drafted outreach for @reson8Labs (441 chars)
+2026-03-09 08:56:42 [agent_town.bd.crm] INFO Outreach queued for prospect 66a16544-582d-47a3-8f44-85353f456b0f via twitter_dm
+2026-03-09 08:56:42 [agent_town.bd.crm] INFO Outreach queued for prospect 66a16544-582d-47a3-8f44-85353f456b0f via twitter_dm
+2026-03-09 08:56:46 [agent_town.bd.crm] INFO Prospect upserted: @clawshilover on twitter
+2026-03-09 08:56:46 [agent_town.bd.crm] INFO Prospect upserted: @clawshilover on twitter
+2026-03-09 08:56:50 [agent_town.bd.outreach] INFO Drafted outreach for @clawshilover (396 chars)
+2026-03-09 08:56:50 [agent_town.bd.outreach] INFO Drafted outreach for @clawshilover (396 chars)
+2026-03-09 08:56:50 [agent_town.bd.crm] INFO Outreach queued for prospect c4f82ae4-d7a5-4cf9-a028-f3b3fd99a785 via twitter_dm
+2026-03-09 08:56:50 [agent_town.bd.crm] INFO Outreach queued for prospect c4f82ae4-d7a5-4cf9-a028-f3b3fd99a785 via twitter_dm
+2026-03-09 08:56:52 [agent_town.scout] INFO Posted opportunity from @owockibot
+2026-03-09 08:56:54 [agent_town.bd.crm] INFO Prospect upserted: @Jakegallen on twitter
+2026-03-09 08:56:54 [agent_town.bd.crm] INFO Prospect upserted: @Jakegallen on twitter
+2026-03-09 08:57:00 [agent_town.bd.outreach] INFO Drafted outreach for @Jakegallen (405 chars)
+2026-03-09 08:57:00 [agent_town.bd.outreach] INFO Drafted outreach for @Jakegallen (405 chars)
+2026-03-09 08:57:00 [agent_town.bd.crm] INFO Outreach queued for prospect c5d65931-3ae0-430b-b28d-6bed625634be via twitter_dm
+2026-03-09 08:57:00 [agent_town.bd.crm] INFO Outreach queued for prospect c5d65931-3ae0-430b-b28d-6bed625634be via twitter_dm
+2026-03-09 08:57:04 [agent_town.bd.crm] INFO Prospect upserted: @BULLTURE_jmclaw on twitter
+2026-03-09 08:57:04 [agent_town.bd.crm] INFO Prospect upserted: @BULLTURE_jmclaw on twitter
+2026-03-09 08:57:07 [agent_town.bd.outreach] INFO Drafted outreach for @BULLTURE_jmclaw (336 chars)
+2026-03-09 08:57:07 [agent_town.bd.outreach] INFO Drafted outreach for @BULLTURE_jmclaw (336 chars)
+2026-03-09 08:57:07 [agent_town.bd.crm] INFO Outreach queued for prospect 200bd1a5-c8ae-40d6-a546-7a7aad3afb61 via twitter_dm
+2026-03-09 08:57:07 [agent_town.bd.crm] INFO Outreach queued for prospect 200bd1a5-c8ae-40d6-a546-7a7aad3afb61 via twitter_dm
+2026-03-09 08:57:11 [agent_town.bd.crm] INFO Prospect upserted: @fitzyOG on twitter
+2026-03-09 08:57:11 [agent_town.bd.crm] INFO Prospect upserted: @fitzyOG on twitter
+2026-03-09 08:57:15 [agent_town.bd.outreach] INFO Drafted outreach for @fitzyOG (324 chars)
+2026-03-09 08:57:15 [agent_town.bd.outreach] INFO Drafted outreach for @fitzyOG (324 chars)
+2026-03-09 08:57:15 [agent_town.bd.crm] INFO Outreach queued for prospect a9bfb71d-4288-483c-ad70-9637f3f43acd via twitter_dm
+2026-03-09 08:57:15 [agent_town.bd.crm] INFO Outreach queued for prospect a9bfb71d-4288-483c-ad70-9637f3f43acd via twitter_dm
+2026-03-09 08:57:19 [agent_town.bd.crm] INFO Prospect upserted: @DamianCTO on twitter
+2026-03-09 08:57:19 [agent_town.bd.crm] INFO Prospect upserted: @DamianCTO on twitter
+2026-03-09 08:57:23 [agent_town.bd.outreach] INFO Drafted outreach for @DamianCTO (476 chars)
+2026-03-09 08:57:23 [agent_town.bd.outreach] INFO Drafted outreach for @DamianCTO (476 chars)
+2026-03-09 08:57:24 [agent_town.bd.crm] INFO Outreach queued for prospect 311c991c-e6e6-4ba7-be58-d87e2ea666ed via twitter_dm
+2026-03-09 08:57:24 [agent_town.bd.crm] INFO Outreach queued for prospect 311c991c-e6e6-4ba7-be58-d87e2ea666ed via twitter_dm
+2026-03-09 08:57:26 [agent_town.bd.crm] INFO Prospect upserted: @Absolcasso on twitter
+2026-03-09 08:57:26 [agent_town.bd.crm] INFO Prospect upserted: @Absolcasso on twitter
+2026-03-09 08:57:29 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 08:57:29 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 08:57:30 [agent_town.clawgig] INFO ClawGig: found 20 gigs
+2026-03-09 08:57:30 [agent_town.scout.crawler] INFO ClawGig crawler: found 20 gigs
+2026-03-09 08:57:30 [agent_town.scout.crawler] INFO ClawGig crawler: found 20 gigs
+2026-03-09 08:57:31 [agent_town.bd.outreach] INFO Drafted outreach for @Absolcasso (433 chars)
+2026-03-09 08:57:31 [agent_town.bd.outreach] INFO Drafted outreach for @Absolcasso (433 chars)
+2026-03-09 08:57:31 [agent_town.bd.crm] INFO Outreach queued for prospect 42704999-ff7f-4d84-bec2-7e2a124d166f via twitter_dm
+2026-03-09 08:57:31 [agent_town.bd.crm] INFO Outreach queued for prospect 42704999-ff7f-4d84-bec2-7e2a124d166f via twitter_dm
+2026-03-09 08:57:37 [agent_town.bd.crm] INFO Prospect upserted: @SloaneEwilder on twitter
+2026-03-09 08:57:37 [agent_town.bd.crm] INFO Prospect upserted: @SloaneEwilder on twitter
+2026-03-09 08:57:42 [agent_town.bd.outreach] INFO Drafted outreach for @SloaneEwilder (434 chars)
+2026-03-09 08:57:42 [agent_town.bd.outreach] INFO Drafted outreach for @SloaneEwilder (434 chars)
+2026-03-09 08:57:42 [agent_town.bd.crm] INFO Outreach queued for prospect 5b775318-bd24-4567-8637-a269b468c7e1 via twitter_dm
+2026-03-09 08:57:42 [agent_town.bd.crm] INFO Outreach queued for prospect 5b775318-bd24-4567-8637-a269b468c7e1 via twitter_dm
+2026-03-09 08:57:48 [agent_town.bd.crm] INFO Prospect upserted: @dexteraiagent on twitter
+2026-03-09 08:57:48 [agent_town.bd.crm] INFO Prospect upserted: @dexteraiagent on twitter
+2026-03-09 08:57:51 [agent_town.bd.outreach] INFO Drafted outreach for @dexteraiagent (496 chars)
+2026-03-09 08:57:51 [agent_town.bd.outreach] INFO Drafted outreach for @dexteraiagent (496 chars)
+2026-03-09 08:57:51 [agent_town.bd.crm] INFO Outreach queued for prospect 8eb9724d-6ff6-4bc1-89fc-e566ad036c59 via twitter_dm
+2026-03-09 08:57:51 [agent_town.bd.crm] INFO Outreach queued for prospect 8eb9724d-6ff6-4bc1-89fc-e566ad036c59 via twitter_dm
+2026-03-09 08:58:24 [agent_town.bd.crm] INFO Prospect upserted: @gabomclv on twitter
+2026-03-09 08:58:24 [agent_town.bd.crm] INFO Prospect upserted: @gabomclv on twitter
+2026-03-09 08:58:27 [agent_town.bd.outreach] INFO Drafted outreach for @gabomclv (331 chars)
+2026-03-09 08:58:27 [agent_town.bd.outreach] INFO Drafted outreach for @gabomclv (331 chars)
+2026-03-09 08:58:27 [agent_town.bd.crm] INFO Outreach queued for prospect cd6fcf8f-e1c9-43b3-9b05-7ebf4bd8447f via twitter_dm
+2026-03-09 08:58:27 [agent_town.bd.crm] INFO Outreach queued for prospect cd6fcf8f-e1c9-43b3-9b05-7ebf4bd8447f via twitter_dm
+2026-03-09 08:58:29 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 08:58:29 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 08:58:30 [agent_town.bd.crm] INFO Prospect upserted: @tekkaadan on twitter
+2026-03-09 08:58:30 [agent_town.bd.crm] INFO Prospect upserted: @tekkaadan on twitter
+2026-03-09 08:58:34 [agent_town.bd.outreach] INFO Drafted outreach for @tekkaadan (366 chars)
+2026-03-09 08:58:34 [agent_town.bd.outreach] INFO Drafted outreach for @tekkaadan (366 chars)
+2026-03-09 08:58:34 [agent_town.bd.crm] INFO Outreach queued for prospect e75f4a2e-a6a9-48b6-ac8c-04bd6670c837 via twitter_dm
+2026-03-09 08:58:34 [agent_town.bd.crm] INFO Outreach queued for prospect e75f4a2e-a6a9-48b6-ac8c-04bd6670c837 via twitter_dm
+2026-03-09 08:58:37 [agent_town.bd.crm] INFO Prospect upserted: @bankrbot on twitter
+2026-03-09 08:58:37 [agent_town.bd.crm] INFO Prospect upserted: @bankrbot on twitter
+2026-03-09 08:58:41 [agent_town.bd.outreach] INFO Drafted outreach for @bankrbot (433 chars)
+2026-03-09 08:58:41 [agent_town.bd.outreach] INFO Drafted outreach for @bankrbot (433 chars)
+2026-03-09 08:58:41 [agent_town.bd.crm] INFO Outreach queued for prospect 328b03a5-d108-42da-8929-09e720cc9959 via twitter_dm
+2026-03-09 08:58:41 [agent_town.bd.crm] INFO Outreach queued for prospect 328b03a5-d108-42da-8929-09e720cc9959 via twitter_dm
+2026-03-09 08:58:44 [agent_town.scout.crawler] WARNING Upwork RSS returned 410 for https://www.upwork.com/ab/feed/jobs/rss?q=web+scraping&sort=recency
+2026-03-09 08:58:44 [agent_town.scout.crawler] WARNING Upwork RSS returned 410 for https://www.upwork.com/ab/feed/jobs/rss?q=web+scraping&sort=recency
+2026-03-09 08:58:44 [agent_town.scout.crawler] WARNING Upwork RSS returned 410 for https://www.upwork.com/ab/feed/jobs/rss?q=data+extraction+automation&sort=recency
+2026-03-09 08:58:44 [agent_town.scout.crawler] WARNING Upwork RSS returned 410 for https://www.upwork.com/ab/feed/jobs/rss?q=data+extraction+automation&sort=recency
+2026-03-09 08:58:44 [agent_town.scout.crawler] WARNING Upwork RSS returned 410 for https://www.upwork.com/ab/feed/jobs/rss?q=python+automation+bot&sort=recency
+2026-03-09 08:58:44 [agent_town.scout.crawler] WARNING Upwork RSS returned 410 for https://www.upwork.com/ab/feed/jobs/rss?q=python+automation+bot&sort=recency
+2026-03-09 08:58:44 [agent_town.scout.crawler] INFO Upwork crawler: found 0 tasks
+2026-03-09 08:58:44 [agent_town.scout.crawler] INFO Upwork crawler: found 0 tasks
+2026-03-09 08:58:44 [agent_town.scout.crawler] INFO Marketplace crawl: 5 viable tasks after evaluation
+2026-03-09 08:58:44 [agent_town.scout.crawler] INFO Marketplace crawl: 5 viable tasks after evaluation
+2026-03-09 08:58:45 [agent_town.bd.crm] INFO Prospect upserted: @NftsBuy on twitter
+2026-03-09 08:58:45 [agent_town.bd.crm] INFO Prospect upserted: @NftsBuy on twitter
+2026-03-09 08:58:45 [agent_town.messaging] INFO scout has 14 unread messages
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task b02962b3-099e-4381-8b52-b5c779317573: Failed: ask_json() got an unexpected keyword argument 'temperature'
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task 5b3932da-7f20-4f33-b6fd-d84596573512: Failed: ask_json() got an unexpected keyword argument 'temperature'
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task b02962b3-099e-4381-8b52-b5c779317573: Failed:   File "C:\Users\theka\AppData\Local\Temp\tmpl2ihhwi8.py", line 349
+    update_data["fields"].update({
+                                 ^
+SyntaxError: '{' was never closed
+
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task b370487a-f0fb-42cf-ba7c-389a08f780b1: Failed: ask_json() got an unexpected keyword argument 'temperature'
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task 3692a33b-67e8-43a9-9788-bdcc9a65aa6b: Failed: ask_json() got an unexpected keyword argument 'temperature'
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task ea49f569-dcb1-4d94-bb67-192b38bf1672: Failed: ask_json() got an unexpected keyword argument 'temperature'
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task aa088a4f-8f92-442e-9ed6-72dfcf8c44fc: Failed: Traceback (most recent call last):
+  File "C:\Users\theka\AppData\Local\Temp\tmp3bj3f5ah.py", line 1, in <module>
+    import tweepy
+ModuleNotFoundError: No module named 'tweepy'
+
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task 88fb2d64-7da9-4948-b479-8d3d9426391f: Failed: ask_json() got an unexpected keyword argument 'temperature'
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task 6ace1389-28b7-48d2-ae2e-9c465dc04338: Failed: ask_json() got an unexpected keyword argument 'temperature'
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task 88fb2d64-7da9-4948-b479-8d3d9426391f: Failed:   File "C:\Users\theka\AppData\Local\Temp\tmp37wlziz7.py", line 373
+    'partial_
+    ^
+SyntaxError: unterminated string literal (detected at line 373)
+
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task dd9d9a4d-ce69-45d1-9f93-51deaef6d506: Failed: ask_json() got an unexpected keyword argument 'temperature'
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task 55cb3af5-bacd-4789-a8ce-b0ab1352ad21: Failed: ask_json() got an unexpected keyword argument 'temperature'
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task 8091a46a-b22b-44c0-a5e0-a71eb08bba30: Failed: ask_json() got an unexpected keyword argument 'temperature'
+2026-03-09 08:58:45 [agent_town.scout] INFO Worker feedback on task 191216ed-e497-46a2-8617-66940a532a8b: Failed: ask_json() got an unexpected keyword argument 'temperature'
+2026-03-09 08:58:46 [agent_town.scout] INFO Scout cycle complete: 197 tweets, 5 marketplace, 22 posted
+2026-03-09 08:58:46 [agent_town.scheduler] INFO [scout] Cycle complete, sleeping 7200s
+2026-03-09 08:58:48 [agent_town.bd.outreach] INFO Drafted outreach for @NftsBuy (307 chars)
+2026-03-09 08:58:48 [agent_town.bd.outreach] INFO Drafted outreach for @NftsBuy (307 chars)
+2026-03-09 08:58:48 [agent_town.bd.crm] INFO Outreach queued for prospect 48ca92a5-e917-4bd2-bc29-808ba91f6395 via twitter_dm
+2026-03-09 08:58:48 [agent_town.bd.crm] INFO Outreach queued for prospect 48ca92a5-e917-4bd2-bc29-808ba91f6395 via twitter_dm
+2026-03-09 08:58:51 [agent_town.bd.crm] INFO Prospect upserted: @0xDeployer on twitter
+2026-03-09 08:58:51 [agent_town.bd.crm] INFO Prospect upserted: @0xDeployer on twitter
+2026-03-09 08:58:55 [agent_town.bd.outreach] INFO Drafted outreach for @0xDeployer (380 chars)
+2026-03-09 08:58:55 [agent_town.bd.outreach] INFO Drafted outreach for @0xDeployer (380 chars)
+2026-03-09 08:58:55 [agent_town.bd.crm] INFO Outreach queued for prospect 179a89ff-3c5f-4f50-a408-a7a3551a64f3 via twitter_dm
+2026-03-09 08:58:55 [agent_town.bd.crm] INFO Outreach queued for prospect 179a89ff-3c5f-4f50-a408-a7a3551a64f3 via twitter_dm
+2026-03-09 08:58:59 [agent_town.bd.crm] INFO Prospect upserted: @Bullish_fun on twitter
+2026-03-09 08:58:59 [agent_town.bd.crm] INFO Prospect upserted: @Bullish_fun on twitter
+2026-03-09 08:59:03 [agent_town.bd.outreach] INFO Drafted outreach for @Bullish_fun (393 chars)
+2026-03-09 08:59:03 [agent_town.bd.outreach] INFO Drafted outreach for @Bullish_fun (393 chars)
+2026-03-09 08:59:03 [agent_town.bd.crm] INFO Outreach queued for prospect a6e0400f-d08d-40c0-8ecf-0001a99b7570 via twitter_dm
+2026-03-09 08:59:03 [agent_town.bd.crm] INFO Outreach queued for prospect a6e0400f-d08d-40c0-8ecf-0001a99b7570 via twitter_dm
+2026-03-09 08:59:08 [agent_town.bd.crm] INFO Prospect upserted: @PvPpush on twitter
+2026-03-09 08:59:08 [agent_town.bd.crm] INFO Prospect upserted: @PvPpush on twitter
+2026-03-09 08:59:11 [agent_town.bd.outreach] INFO Drafted outreach for @PvPpush (360 chars)
+2026-03-09 08:59:11 [agent_town.bd.outreach] INFO Drafted outreach for @PvPpush (360 chars)
+2026-03-09 08:59:11 [agent_town.bd.crm] INFO Outreach queued for prospect 071224b5-f4d9-4a48-80d1-dc93470d2342 via twitter_dm
+2026-03-09 08:59:11 [agent_town.bd.crm] INFO Outreach queued for prospect 071224b5-f4d9-4a48-80d1-dc93470d2342 via twitter_dm
+2026-03-09 08:59:14 [agent_town.bd.crm] INFO Prospect upserted: @WEB3Seer on twitter
+2026-03-09 08:59:14 [agent_town.bd.crm] INFO Prospect upserted: @WEB3Seer on twitter
+2026-03-09 08:59:17 [agent_town.bd.outreach] INFO Drafted outreach for @WEB3Seer (308 chars)
+2026-03-09 08:59:17 [agent_town.bd.outreach] INFO Drafted outreach for @WEB3Seer (308 chars)
+2026-03-09 08:59:18 [agent_town.bd.crm] INFO Outreach queued for prospect 1e8a3621-6336-45ea-a4fb-a8976a42f077 via twitter_dm
+2026-03-09 08:59:18 [agent_town.bd.crm] INFO Outreach queued for prospect 1e8a3621-6336-45ea-a4fb-a8976a42f077 via twitter_dm
+2026-03-09 08:59:22 [agent_town.bd.crm] INFO Prospect upserted: @remittered71239 on twitter
+2026-03-09 08:59:22 [agent_town.bd.crm] INFO Prospect upserted: @remittered71239 on twitter
+2026-03-09 08:59:26 [agent_town.bd.outreach] INFO Drafted outreach for @remittered71239 (335 chars)
+2026-03-09 08:59:26 [agent_town.bd.outreach] INFO Drafted outreach for @remittered71239 (335 chars)
+2026-03-09 08:59:26 [agent_town.bd.crm] INFO Outreach queued for prospect c4b5ba9e-1d7d-4652-bd6a-59118a0bc4e9 via twitter_dm
+2026-03-09 08:59:26 [agent_town.bd.crm] INFO Outreach queued for prospect c4b5ba9e-1d7d-4652-bd6a-59118a0bc4e9 via twitter_dm
+2026-03-09 08:59:29 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 08:59:30 [agent_town.messaging] INFO worker has 1 unread messages
+2026-03-09 08:59:30 [agent_town.worker] INFO Worker received: new_opportunities from scout
+2026-03-09 08:59:30 [agent_town.worker.scorer] INFO Ranked 5 opportunities | top: 0.6975 (clawgig, $25.0, low)
+2026-03-09 08:59:30 [agent_town.worker.scorer] INFO Ranked 5 opportunities | top: 0.6975 (clawgig, $25.0, low)
+2026-03-09 08:59:30 [agent_town.worker] INFO Attempting task 74d22296-441d-4b60-b2da-e8d84a022c24: Smoke Test Gig from Autonomous Agent
+
+This is a smoke test gig created by an autonomous agent to val
+2026-03-09 08:59:30 [agent_town.worker] INFO ClawGig gig 875514bd-5e4a-4365-97ce-62e1744af47b: drafting proposal
+2026-03-09 08:59:30 [agent_town.bd.crm] INFO Prospect upserted: @thangfuji on twitter
+2026-03-09 08:59:30 [agent_town.bd.crm] INFO Prospect upserted: @thangfuji on twitter
+2026-03-09 08:59:35 [agent_town.bd.outreach] INFO Drafted outreach for @thangfuji (417 chars)
+2026-03-09 08:59:35 [agent_town.bd.outreach] INFO Drafted outreach for @thangfuji (417 chars)
+2026-03-09 08:59:35 [agent_town.bd.crm] INFO Outreach queued for prospect 2bc5e157-648f-4060-8322-530c87b0f930 via twitter_dm
+2026-03-09 08:59:35 [agent_town.bd.crm] INFO Outreach queued for prospect 2bc5e157-648f-4060-8322-530c87b0f930 via twitter_dm
+2026-03-09 08:59:35 [agent_town.worker] ERROR ClawGig proposal failed for gig 875514bd-5e4a-4365-97ce-62e1744af47b: 400 Client Error: Bad Request for url: https://clawgig.ai/api/v1/gigs/875514bd-5e4a-4365-97ce-62e1744af47b/proposals
+2026-03-09 08:59:35 [agent_town.worker] INFO Attempting task 15f28341-0516-4e78-b988-e6ee08e0e104: Build an API Integration
+
+Connect two services via their APIs with error handling
+
+Approach: Analyze
+2026-03-09 08:59:35 [agent_town.worker] INFO ClawGig gig 8f644bfa-009e-4086-ad17-6898049c074f: drafting proposal
+2026-03-09 08:59:39 [agent_town.bd.crm] INFO Prospect upserted: @CryptoGoldAct on twitter
+2026-03-09 08:59:39 [agent_town.bd.crm] INFO Prospect upserted: @CryptoGoldAct on twitter
+2026-03-09 08:59:40 [agent_town.worker] ERROR ClawGig proposal failed for gig 8f644bfa-009e-4086-ad17-6898049c074f: 400 Client Error: Bad Request for url: https://clawgig.ai/api/v1/gigs/8f644bfa-009e-4086-ad17-6898049c074f/proposals
+2026-03-09 08:59:40 [agent_town.worker] INFO Attempting task 61d95d0b-3719-497f-8891-22f648901079: Create a webhook handler for Shopify orders
+
+Looking for someone to build a webhook handler that pro
+2026-03-09 08:59:40 [agent_town.worker] INFO ClawGig gig f508d93a-1448-40f4-a7f9-fe25353b1405: drafting proposal
+2026-03-09 08:59:42 [agent_town.bd.outreach] INFO Drafted outreach for @CryptoGoldAct (397 chars)
+2026-03-09 08:59:42 [agent_town.bd.outreach] INFO Drafted outreach for @CryptoGoldAct (397 chars)
+2026-03-09 08:59:43 [agent_town.bd.crm] INFO Outreach queued for prospect 47d1dd57-6d2a-4a63-829c-8e8e70f6e010 via twitter_dm
+2026-03-09 08:59:43 [agent_town.bd.crm] INFO Outreach queued for prospect 47d1dd57-6d2a-4a63-829c-8e8e70f6e010 via twitter_dm
+2026-03-09 08:59:44 [agent_town.worker] ERROR ClawGig proposal failed for gig f508d93a-1448-40f4-a7f9-fe25353b1405: 400 Client Error: Bad Request for url: https://clawgig.ai/api/v1/gigs/f508d93a-1448-40f4-a7f9-fe25353b1405/proposals
+2026-03-09 08:59:44 [agent_town.worker] INFO Worker cycle: 3 attempted, 0 completed, 3 failed, $0.00 revenue
+2026-03-09 08:59:46 [agent_town.bd.crm] INFO Prospect upserted: @Strickland99842 on twitter
+2026-03-09 08:59:46 [agent_town.bd.crm] INFO Prospect upserted: @Strickland99842 on twitter
+2026-03-09 08:59:50 [agent_town.bd.outreach] INFO Drafted outreach for @Strickland99842 (458 chars)
+2026-03-09 08:59:50 [agent_town.bd.outreach] INFO Drafted outreach for @Strickland99842 (458 chars)
+2026-03-09 08:59:50 [agent_town.bd.crm] INFO Outreach queued for prospect 77cda744-6645-4ea7-9d7a-51ffdcbb16ec via twitter_dm
+2026-03-09 08:59:50 [agent_town.bd.crm] INFO Outreach queued for prospect 77cda744-6645-4ea7-9d7a-51ffdcbb16ec via twitter_dm
+2026-03-09 08:59:50 [agent_town.bd] INFO BD cycle complete: 219 tweets scanned, 98 prospects, 98 drafts
+2026-03-09 08:59:50 [agent_town.scheduler] INFO [bd] Cycle complete, sleeping 7200s
+2026-03-09 09:00:44 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:00:44 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:01:44 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:01:44 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:02:45 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:02:45 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:03:45 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:03:45 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:04:45 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:04:45 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:05:46 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:05:46 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:06:46 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:06:46 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:07:46 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:07:46 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:08:47 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:08:47 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:09:47 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:09:47 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:10:47 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:10:47 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:11:48 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:11:48 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:12:48 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:12:48 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:13:48 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:13:48 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:14:48 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:14:49 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:15:49 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:15:49 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:16:49 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:16:49 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:17:50 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:17:50 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:18:50 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:18:50 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:19:50 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:19:50 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:20:51 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:20:51 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:21:51 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:21:51 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:22:51 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:22:51 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:23:51 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:23:52 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:24:52 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:24:52 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:25:52 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:25:52 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:26:52 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:26:52 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:27:53 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:27:53 [agent_town.worker] INFO No new opportunities, waiting
+2026-03-09 09:28:53 [agent_town.worker] INFO Starting Worker cycle
+2026-03-09 09:28:53 [agent_town.worker] INFO No new opportunities, waiting
