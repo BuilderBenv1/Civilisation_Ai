@@ -1,6 +1,0 @@
-2026-03-09 15:40:01 [agent_town.darwin.fitness] INFO Fitness score for scout/agents/scout/search.py: 0.850 (risk=low, auto=True)
-2026-03-09 15:40:06 [agent_town.darwin.fitness] INFO Fitness score for worker/agents/worker/proposal.py: 0.750 (risk=medium, auto=False)
-2026-03-09 15:40:10 [agent_town.darwin.fitness] INFO Fitness score for bd/agents/bd/outreach.py: 0.850 (risk=low, auto=True)
-2026-03-09 15:43:17 [agent_town.darwin.fitness] INFO Fitness score for scout/agents/scout/evaluate.py: 0.850 (risk=low, auto=True)
-2026-03-09 15:43:22 [agent_town.darwin.fitness] INFO Fitness score for worker/agents/worker/bid.py: 0.300 (risk=high, auto=False)
-2026-03-09 15:43:26 [agent_town.darwin.fitness] INFO Fitness score for scout/agents/scout/search.py: 0.850 (risk=low, auto=True)

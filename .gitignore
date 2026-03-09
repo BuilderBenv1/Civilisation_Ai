@@ -3,3 +3,7 @@ __pycache__/
 .env
 logs/
 supabase/.temp/
+agent_ids.json
+node_modules/
+*.log
+.moltlaunch/
