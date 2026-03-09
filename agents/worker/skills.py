@@ -1,18 +1,14 @@
-def get_skill_confidence(skill_name):
-    """Return confidence score 0-1 based on historical success"""
-    confidence_map = {
-        'python': 0.9,
-        'javascript': 0.8,
-        'data_analysis': 0.85,
-        'web_scraping': 0.7,
-        'api_integration': 0.75,
-        'automation': 0.8
-    }
-    return confidence_map.get(skill_name.lower(), 0.5)
+def get_skill_confidence(self, required_skills):
+    our_skills = ['writing', 'research', 'data_analysis', 'social_media', 'basic_coding']
+    skill_weights = {'writing': 0.9, 'research': 0.8, 'data_analysis': 0.7, 'social_media': 0.8, 'basic_coding': 0.6}
+    
+    confidence = 0
+    for skill in required_skills:
+        if skill.lower() in our_skills:
+            confidence += skill_weights.get(skill.lower(), 0.5)
+    
+    return min(confidence / len(required_skills), 1.0) if required_skills else 0.5
 
-def select_best_skills(opportunity, max_skills=3):
-    """Select highest confidence skills matching opportunity"""
-    relevant_skills = get_relevant_skills(opportunity)
-    scored_skills = [(skill, get_skill_confidence(skill)) for skill in relevant_skills]
-    scored_skills.sort(key=lambda x: x[1], reverse=True)
-    return [skill for skill, _ in scored_skills[:max_skills]]
+def should_bid(self, opportunity):
+    confidence = self.get_skill_confidence(opportunity.required_skills)
+    return confidence >= 0.7  # Only bid if we're 70%+ confident
